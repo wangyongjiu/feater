@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>因子看板</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="聚宽让量化交易的成长之路更为平坦，聚宽让做量化交易的成本极大降低">
+    <meta name="keywords" content="因子看板、研究策略、本地数据、量化聚宽">
+    <meta name="robots" content="all"/>
+    <link rel="shortcut icon" href="../static/favicon.ico"  type="image/x-icon"/>
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
+    <style>
+        html,body{
+          width: 100%;
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+        body{
+          background: #eeeeee;
+        }
+        .describe{
+          background: #ffffff;
+          padding: 24px;
+          border-bottom: 1px solid #cccccc;
+        }
+
+        .head{
+          width: 100%;
+          line-height: 60px;
+          background: #009688;
+          color: #ffffff;
+          position: fixed;
+          top: 0;
+          z-index: 10;
+        }
+        .head span{
+          float: left;
+          margin-left: 10px;
+          font-weight: 700;
+        }
+        .head ul li{
+          float: right;
+          padding-right: 20px;
+        }
+        .Factor a{
+          color: #4184e1;
+        }
+        @media screen and (max-width: 640px){
+          .head .one{
+            display: none;
+          }
+          .goback{
+            display: none;
+          }
+        }
+        @media screen and (min-width: 640px){
+          .head .two{
+            display: none;
+          }
+          .goback1{
+            display: none;
+          }
+        }
+        .two_li dl dd{
+          padding-left: 20px;
+          border-bottom: 1px dashed #cccccc;
+        }
+    </style>
+
+    <script src="../static/jquery-1.11.1.min.js"></script>
+    <script src="../static/layui/layui.js"></script>
+</head>
+<body>
+
+<div class="head">
+  <span class="logo">Factor Kanban</span>
+  <ul class="layui-nav one">
+    <li class="layui-nav-item">专家信息</li>
+    <li class="layui-nav-item">园区信息</li>
+    <li class="layui-nav-item">自助评级</li>
+    <li class="layui-nav-item">行业研究</li>
+    <li class="layui-nav-item">研究策略</li>
+    <li class="layui-nav-item">首页</li>
+  </ul>
+  <ul class="two">
+    <li class="layui-nav-item two_li">
+      <i class="layui-icon" style="padding: 0 0 0 20px;">&#xe671;</i>
+      <dl class="layui-nav-child">
+        <dd><a href="javascript:;">首页</a></dd>
+        <dd><a href="javascript:;">研究策略</a></dd>
+        <dd><a href="javascript:;">行业研究</a></dd>
+        <dd><a href="javascript:;">自助评级</a></dd>
+        <dd><a href="javascript:;">园区信息</a></dd>
+        <dd><a href="javascript:;">专家信息</a></dd>
+      </dl>
+    </li>
+  </ul>
+  <div style="clear: both;"></div>
+</div>
+<div style="height: 70px;"></div>
+<script>
+  $('.two_li').click(function(){
+    $('.two_li dl').toggle()
+  })
+</script>
+
+
+
+<div class="layui-container">
+    <div class="describe">
+      <form class="layui-form layui-form-pane" action="" method="post">
+        <div class="layui-row">
+          <div class="layui-col-md3">
+            <div class="layui-form-item">
+              <label class="layui-form-label">组合构建：</label>
+              <div class="layui-input-block">
+                <select name="combination" lay-verify="required">
+                  <option value="20150105">纯多头组合</option>
+                  <option value="20150106">多空组合I</option>
+                  <option value="20150107">多空组合II</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="layui-col-md3">
+            <div class="layui-form-item">
+              <label class="layui-form-label">股池票：</label>
+              <div class="layui-input-block">
+                <select name="pool" lay-verify="required">
+                  <option value="2">深沪300</option>
+                  <option value="3">中证500</option>
+                  <option value="4">中证800</option>
+                  <option value="5">中证1000</option>
+                  <option value="6">中证全指</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="layui-col-md3">
+            <div class="layui-form-item">
+              <label class="layui-form-label">回测区间：</label>
+              <div class="layui-input-block">
+                <select name="interval" lay-verify="required">
+                  <option value="近3个月">近3个月</option>
+                  <option value="1">近1年</option>
+                  <option value="2">近3年</option>
+                  <option value="3">近10年</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="layui-col-md3">
+            <div class="layui-form-item">
+              <label class="layui-form-label" title="过滤涨停及停牌股:">过滤涨停及停牌股：</label>
+              <div class="layui-input-block">
+                <select name="dailylimit" lay-verify="required">
+                  <option value="否">否</option>
+                  <option value="1">是</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="layui-col-md3">
+            <div class="layui-form-item">
+              <label class="layui-form-label" title="手续费及滑点:">手续费及滑点：</label>
+              <div class="layui-input-block">
+                <select name="cost" lay-verify="required">
+                  <option value="无">无</option>
+                  <option value="1">3‱佣金+1‰印花税+无滑点</option>
+                  <option value="2">3‱佣金+1‰印花税+1‰滑点</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="layui-col-md3">
+            <button class="layui-btn" lay-button lay-filter="formDemo" type="button" style="padding: 0 120px;" onclick="FormSub()">确定</button>
+          </div>
+        </div>
+      </form>
+  </div>
+</div>
+
+
+<!-- 底部数据列表 -->
+<div class="layui-container" style="overflow: auto;">
+  <table class="layui-table Factor" width="100%">
+    <colgroup>
+      <col width="150">
+      <col width="200">
+      <col>
+    </colgroup>
+    <thead>
+      <tr>
+        <th>因子看板</th>
+        <th>最小分位数超额年化收益率</th>
+        <th>最大分位数额年化收益率</th>
+        <th>最小分位数换手率</th>
+        <th>最大分位数换手率</th>
+        <th>IC均值</th>
+        <th>IR值</th>
+      </tr> 
+    </thead>
+    <tbody>
+      <tr>
+        <td>净利润与营业总收入之比</td>
+        <td>-3.64%</td>
+        <td>2.13%</td>
+        <td>1.60%</td>
+        <td>0.96%</td>
+        <td>0.015</td>
+        <td>0.209</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .footer{
+    width: 100%;
+    height: 260px;
+    background: #009688;
+    color: #ffffff;
+  }
+  .footer dl{
+    float: left;
+    padding: 20px 140px 20px 0;
+  }
+  .footer dl dt{
+    font-size: 20px;
+    line-height: 40px;
+  }
+  .footer dl dd{
+    line-height: 24px;
+  }
+  .footer p {
+    text-align: center;
+    margin-top: 20px;
+  }
+  @media screen and (max-width: 640px){
+    .footer dl{
+      float: left;
+      padding: 20px;
+    }
+  }
+  @media screen and (max-width: 1200px){
+    .footer .dl{
+      display: none;
+    }
+  }
+</style>
+<div class="footer">
+  <div class="layui-container">
+    <div>
+      <dl class="dl">
+        <dt>关于</dt>
+        <dd>关于我们</dd>
+        <dd>加入我们</dd>
+        <dd>联系我们</dd>
+      </dl>
+      <dl class="dl">
+        <dt>帮助</dt>
+        <dd>常见问题</dd>
+        <dd>API文档</dd>
+      </dl>
+      <dl class="dl">
+        <dt>友情链接</dt>
+        <dd>果仁网</dd>
+      </dl>
+      <dl>
+        <dt>关注我们</dt>
+        <dd>知乎专栏</dd>
+        <dd>雪球</dd>
+        <dd>新浪微博</dd>
+      </dl>
+      <dl>
+        <img src="../static/images/qrcode.png" alt="">
+        <dd style="text-align: center">微信公众号</dd>
+      </dl>
+    </div>
+  </div>
+  <div style="clear: both;"></div>
+  <p>@2022 津icp备15002249号-6</p>
+</div>
+
+
+</body>
+<script>
+  function FormSub(){
+    var combination = $('select[name="combination"]').val();
+    var pool = $('select[name="pool"]').val();
+    var interval = $('select[name="interval"]').val();
+    var dailylimit = $('select[name="dailylimit"]').val();
+    var cost = $('select[name="cost"]').val();
+
+    console.log(combination,pool);
+
+    var _html = '';
+    // $.ajax({
+    //     type:'post',
+    //     url:'http://127.0.0.1:5000/formsub',
+    //     data:{"combination":combination,"pool":pool},
+    //     success:function(data){
+    //         console.log(data)
+    //         $('.total').text(data)
+    //         $('.result').show()
+            for(var i = 0; i < 20; i ++){
+              _html +=  '<tr><td><a href="/details/'+i+'">营业外收支利润净额</a></td><td>-3.64%</td><td>2.13%</td><td>1.60%</td><td>0.96%</td><td>0.015</td><td>0.209</td></tr>'
+            }
+            $('.Factor tbody').html(_html)
+    //     }
+    // })
+  }
+
+
+  var _html = '';
+  for(var i = 0; i < 10; i ++){
+    _html +=  '<tr><td><a href="/details/'+i+'">净利润与营业总收入之比</a></td><td>-3.64%</td><td>2.13%</td><td>1.60%</td><td>0.96%</td><td>0.015</td><td>0.209</td></tr>'
+  }
+  $('.Factor tbody').html(_html)
+</script>
+<script>
+layui.use(['util'],function(){
+  var layer = layui.layer,
+      util = layui.util,
+      element = layui.element;
+      laydate = layui.laydate;
+    //返回顶部
+    util.fixbar({
+      bar1: false
+      ,bar2: false
+      ,css: {right: 10, bottom: 30}
+      ,bgcolor: '#009688'
+    });
+});
+</script>
+</html>
