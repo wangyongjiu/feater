@@ -8,14 +8,6 @@ from flask import *
 app = Flask(__name__)
 
 
-from sklearn.datasets import load_iris
-
-def datasets_demo():
-    irls = load_iris()
-    print("鸢尾花数据集:\n",irls)
-    print("查看数据集描述:\n",irls["DESCR"])
-    return None
-
 
 def test(args):
     print(args)
@@ -79,7 +71,6 @@ def insert():
 # 首页显示
 @app.route('/',methods=['GET', 'POST'])
 def index():
-    # datasets_demo()
     return render_template('index.html')
 
 
