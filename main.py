@@ -118,6 +118,7 @@ def details(details):
         table_data = return_all('select * from test where date="' + search + '.0"')
     else:
         table_data = return_all('select * from test where date="20150115.0" limit 10')
+    print(table_data)
     return render_template('details.html', table_data=table_data,details=details)
 
 
