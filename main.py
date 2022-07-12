@@ -2,11 +2,15 @@ import os
 import json
 import feather
 import pymysql.cursors
+import csv
 import pandas as pd
 from flask import *
 
-app = Flask(__name__)
+app = Flask(__name__,static_folder="static")
 
+pd.set_option('display.width', 10000) # 设置字符显示宽度
+pd.set_option('display.max_rows', None) # 设置显示最大行
+pd.set_option('display.max_columns', None) # 设置显示最大列，None为显示所有列
 
 
 def test(args):
@@ -79,7 +83,7 @@ def index():
 @app.route('/search',methods=['GET', 'POST'])
 def search():
     search = request.form.get('search')
-    print(search)
+    # print(search)
     search_all_data = return_all('select * from test where date="' + search + '.0"')
     list1 = json.dumps(search_all_data)
     return list1
@@ -88,7 +92,7 @@ def search():
 # 第一个数据图表展示查询
 @app.route('/search1/<string:search1>',methods=['GET'])
 def search1(search1):
-    print(search1)
+    # print(search1)
     search_all_data = return_all('select * from test where date="' + search1 + '.0"')
     list2 = json.dumps(search_all_data)
     return list2
@@ -112,13 +116,13 @@ def formsub():
 # 详情页显示
 @app.route('/details/<string:details>',methods=['GET','POST'])
 def details(details):
-    print(details)
+    # print(details)
     search = request.form.get('search')
     if search:
         table_data = return_all('select * from test where date="' + search + '.0"')
     else:
         table_data = return_all('select * from test where date="20150115.0" limit 10')
-    print(table_data)
+    # print(table_data)
     return render_template('details.html', table_data=table_data,details=details)
 
 
@@ -128,7 +132,20 @@ def details(details):
 def echarts():
     arr = json.load(open(os.path.join('static/','echarts.json'),'r',encoding="utf-8"))
     # print(json.dumps(arr))
-    return str(json.dumps(arr))
+    return json.dumps(arr)
+
+
+
+# music数据接口
+@app.route('/music',methods=['GET','POST'])
+def music():
+    arr = []
+    with open(os.path.join('static/', 'music.csv'), 'r',encoding="utf-8") as f:
+        reader = csv.DictReader(f) #csv中字典方式的读
+        for row in reader:
+            dic = {'name':row['\ufeffFormat'],'year':row['Year'],'value':row['Revenue (Inflation Adjusted)']}
+            arr.append(dic)
+    return json.dumps(arr)
 
 
 
