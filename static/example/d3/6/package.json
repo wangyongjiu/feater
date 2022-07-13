@@ -1,0 +1,14 @@
+{
+  "name": "@mbostock/electric-usage-2019",
+  "main": "6c99aa23eaa7627f@393.js",
+  "version": "393.0.0",
+  "homepage": "https://observablehq.com/@mbostock/electric-usage-2019",
+  "author": {
+    "name": "Mike Bostock",
+    "url": "https://observablehq.com/@mbostock"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4"
+  }
+}

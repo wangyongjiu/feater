@@ -1,0 +1,14 @@
+{
+  "name": "@mbostock/revenue-by-music-format-1973-2018",
+  "main": "7babbae81635eb14@610.js",
+  "version": "610.0.0",
+  "homepage": "https://observablehq.com/@mbostock/revenue-by-music-format-1973-2018",
+  "author": {
+    "name": "Mike Bostock",
+    "url": "https://observablehq.com/@mbostock"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4"
+  }
+}

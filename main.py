@@ -130,22 +130,30 @@ def details(details):
 # echarts
 @app.route('/echarts',methods=['GET','POST'])
 def echarts():
-    arr = json.load(open(os.path.join('static/','echarts.json'),'r',encoding="utf-8"))
+    arr = json.load(open(os.path.join('static/data/','echarts.json'),'r',encoding="utf-8"))
     # print(json.dumps(arr))
     return json.dumps(arr)
 
-
+# obama
+@app.route('/obama',methods=['GET','POST'])
+def obama():
+    arr = json.load(open(os.path.join('static/data/','obama_budget_proposal_2012.json'),'r',encoding="utf-8"))
+    # print(json.dumps(arr))
+    return json.dumps(arr)
 
 # music数据接口
 @app.route('/music',methods=['GET','POST'])
 def music():
     arr = []
-    with open(os.path.join('static/', 'music.csv'), 'r',encoding="utf-8") as f:
+    with open(os.path.join('static/data/', 'music.csv'), 'r',encoding="utf-8") as f:
         reader = csv.DictReader(f) #csv中字典方式的读
         for row in reader:
             dic = {'name':row['\ufeffFormat'],'year':row['Year'],'value':row['Revenue (Inflation Adjusted)']}
             arr.append(dic)
     return json.dumps(arr)
+
+
+
 
 
 

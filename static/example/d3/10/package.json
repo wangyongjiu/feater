@@ -1,0 +1,14 @@
+{
+  "name": "@d3/radial-area-chart",
+  "main": "c2e9282bd58bd4a7@487.js",
+  "version": "487.0.0",
+  "homepage": "https://observablehq.com/@d3/radial-area-chart",
+  "author": {
+    "name": "D3",
+    "url": "https://observablehq.com/@d3"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4"
+  }
+}
