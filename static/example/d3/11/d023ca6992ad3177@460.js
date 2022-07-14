@@ -52,7 +52,7 @@ function _locale(md)
   };
   form.onsubmit = event => event.preventDefault();
   form.value = Promise.resolve();
-  return form; 
+  return form;
 }
 
 

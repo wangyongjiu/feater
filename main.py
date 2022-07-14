@@ -49,7 +49,6 @@ def execute_sql(sql):
 
 
 
-
 # 上传文件，将文件保存在本地
 @app.route('/upload',methods=['GET', 'POST'])
 def upload():
@@ -71,12 +70,10 @@ def insert():
     return render_template('index.html')
 
 
-
 # 首页显示
 @app.route('/',methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
-
 
 
 # 按时间查询
@@ -151,11 +148,6 @@ def music():
             dic = {'name':row['\ufeffFormat'],'year':row['Year'],'value':row['Revenue (Inflation Adjusted)']}
             arr.append(dic)
     return json.dumps(arr)
-
-
-
-
-
 
 
 
