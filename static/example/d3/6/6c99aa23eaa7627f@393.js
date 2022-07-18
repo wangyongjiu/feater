@@ -156,12 +156,12 @@ export default function define(runtime, observer) {
   const main = runtime.module();
   function toString() { return this.url; }
   const fileAttachments = new Map([
-    ["pge-electric-data.csv", {url: new URL("./files/31d6f247dda4f29d7033181b9f8caa5245c0165e010f9e2d2545715e53cd714f57d7bcf8234425d432633046de6d2b4d54b28ce58650ecca81efb6062d44328b.csv", import.meta.url), mimeType: "text/csv", toString}]
+    ["pge-electric-data.csv", {url: new URL("./files/data.csv", import.meta.url), mimeType: "text/csv", toString}]
   ]);
   main.builtin("FileAttachment", runtime.fileAttachments(name => fileAttachments.get(name)));
   main.variable(observer()).define(["md"], _1);
   main.variable(observer("chart")).define("chart", ["d3","width","height","legend","color","xAxis","yAxis","data","x","y","formatDate","formatUsage"], _chart);
-  main.variable(observer()).define(["md"], _3);
+  // main.variable(observer()).define(["md"], _3);
   main.variable(observer("data")).define("data", ["d3","FileAttachment","parseData"], _data);
   main.variable(observer("parseData")).define("parseData", ["parseDate"], _parseData);
   main.variable(observer("parseDate")).define("parseDate", ["d3"], _parseDate);

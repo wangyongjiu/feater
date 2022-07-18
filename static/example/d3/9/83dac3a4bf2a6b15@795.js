@@ -199,7 +199,7 @@ export default function define(runtime, observer) {
   const main = runtime.module();
   function toString() { return this.url; }
   const fileAttachments = new Map([
-    ["us-distribution-state-age.csv", {url: new URL("./files/00fe5b1550153b0e78a3ed246f5e7a286440d130501f64507fe83a24770b15f661282c4529120d43312e2daef5f112cf6c1af2977d7beaa9537f96235afe05a4.csv", import.meta.url), mimeType: "text/csv", toString}]
+    ["us-distribution-state-age.csv", {url: new URL("./files/data.csv", import.meta.url), mimeType: "text/csv", toString}]
   ]);
   main.builtin("FileAttachment", runtime.fileAttachments(name => fileAttachments.get(name)));
   main.variable(observer()).define(["md"], _1);
@@ -209,15 +209,15 @@ export default function define(runtime, observer) {
   main.variable(observer("chart")).define("chart", ["DotPlot","stateage","width"], _chart);
   main.variable(observer("stateage")).define("stateage", ["FileAttachment"], _stateage);
   main.variable(observer()).define(["chart","d3","stateage","order"], _6);
-  main.variable(observer()).define(["howto"], _7);
-  main.variable(observer()).define(["altplot"], _8);
+  // main.variable(observer()).define(["howto"], _7);
+  // main.variable(observer()).define(["altplot"], _8);
   main.variable(observer("DotPlot")).define("DotPlot", ["d3"], _DotPlot);
   const child1 = runtime.module(define1);
   main.import("Legend", child1);
   const child2 = runtime.module(define2);
   main.import("howto", child2);
   main.import("altplot", child2);
-  main.variable(observer()).define(["md"], _12);
+  // main.variable(observer()).define(["md"], _12);
   main.variable(observer("trigger")).define("trigger", ["viewof order","Event","invalidation"], _trigger);
   return main;
 }

@@ -179,14 +179,14 @@ export default function define(runtime, observer) {
   const main = runtime.module();
   function toString() { return this.url; }
   const fileAttachments = new Map([
-    ["aapl-2.csv", {url: new URL("./files/480edd4fc0a85d1a89939f369cd99011777ea2911b5957f80bee4529d56a6e9a387897700c41ded5ac82c30fb5868b12b0e2d12ec995f66290635b5ea0afbac7", import.meta.url), mimeType: null, toString}]
+    ["aapl-2.csv", {url: new URL("./files/data.csv", import.meta.url), mimeType: null, toString}]
   ]);
   main.builtin("FileAttachment", runtime.fileAttachments(name => fileAttachments.get(name)));
   main.variable(observer()).define(["md"], _1);
   main.variable(observer("chart")).define("chart", ["CandlestickChart","aapl","width"], _chart);
   main.variable(observer("aapl")).define("aapl", ["FileAttachment"], _aapl);
-  main.variable(observer()).define(["howto"], _4);
-  main.variable(observer()).define(["altplot"], _5);
+  // main.variable(observer()).define(["howto"], _4);
+  // main.variable(observer()).define(["altplot"], _5);
   main.variable(observer("CandlestickChart")).define("CandlestickChart", ["d3"], _CandlestickChart);
   const child1 = runtime.module(define1);
   main.import("howto", child1);

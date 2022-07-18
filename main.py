@@ -151,5 +151,16 @@ def music():
 
 
 
+# @app.route('/csvpasue',methods=['GET','POST'])
+# def obama():
+#     arrcsv = json.load(open(os.path.join('static/data/example/testdemo/','8.csv'),'r',encoding="utf-8"))
+#     print(json.dumps(arrcsv))
+#     return json.dumps(arrcsv)
+
+
+
+
+
+
 if __name__ == '__main__':
         app.run(host='127.0.0.1')

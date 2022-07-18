@@ -1,0 +1,539 @@
+{
+  "name": "Deep Learning Factor",
+  "children": [
+    {
+      "name": "LSTM",
+      "children": [
+        {
+          "name": "barra",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "name": "basic",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "name": "fundamental",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "name": "price-volume",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CNN",
+      "children": [
+                {
+          "name": "barra",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "name": "basic",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "name": "fundamental",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "name": "price-volume",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "GRU",
+      "children": [
+                {
+          "name": "barra",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "name": "basic",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "name": "fundamental",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "name": "price-volume",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "HAN",
+      "children": [
+                {
+          "name": "barra",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "name": "basic",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "name": "fundamental",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "name": "price-volume",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Transformer",
+      "children": [
+                {
+          "name": "barra",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "name": "basic",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "name": "fundamental",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "name": "price-volume",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TCN",
+      "children": [
+                {
+          "name": "barra",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "name": "basic",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "name": "fundamental",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "name": "price-volume",
+          "children": [
+            {
+              "name": "hourly frequency",
+              "value": 1000
+            },
+            {
+              "name": "daily frequency",
+              "value": 250
+            },
+            {
+              "name": "weekly frequency",
+              "value": 52
+            },
+            {
+              "name": "monthly frequency",
+              "value": 12
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
