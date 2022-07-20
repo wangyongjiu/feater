@@ -8,124 +8,8 @@
     <meta name="keywords" content="因子看板、研究策略、本地数据、量化聚宽">
     <link rel="shortcut icon" href="../static/favicon.ico"  type="image/x-icon"/>
     <link rel="stylesheet" href="../static/layui/css/layui.css">
-    <style>
-        html,body{
-          width: 100%;
-          height: 100%;
-          margin: 0;
-          padding: 0;
-        }
-        body{
-            background: #eeeeee;
-        }
-         .title{
-            padding: 24px 0;
-             float: left;
-             background: #ffffff;
-             width: 100%;
-        }
-        .title .l{
-          float: left;
-          border-left: 5px solid #53a0e4;
-          padding-left: 10px;
-        }
-        .title .r{
-          float: right;
-            padding-right: 10px;
-        }
-        .table_l{
-            width: 50%;
-            float: left;
-        }
-
-        .describe{
-          background: #ffffff;
-          padding: 24px;
-          border-bottom: 1px solid #cccccc;
-        }
-        .describe h1{
-          font-size: 28px;
-          margin-bottom: 12px;
-        }
-        .describe .info_item{
-          margin-bottom: 10px;
-        }
-        .describe .info_item span:nth-child(1){
-          color: #bbbbbb;
-        }
-        .result{
-          background: #ffffff;
-          padding: 20px;
-        }
-        .result li {
-          float: left;
-          width: 200px;
-        }
-        .result>li>span:nth-child(1){
-          color: #aaaaaa;
-        }
-        .result>li>span:nth-child(3){
-          font-size: 30px;
-        }
-        .result:after{
-          display:block;
-          clear:both;
-          content:"";  
-          visibility:hidden;
-          height:0;
-        }
-
-        .head{
-          width: 100%;
-          line-height: 60px;
-          background: #009688;
-          color: #ffffff;
-          position: fixed;
-          top: 0;
-          z-index: 1;
-        }
-        .head span{
-          float: left;
-          margin-left: 10px;
-          font-weight: 700;
-        }
-        .head ul li{
-          float: right;
-          padding-right: 20px;
-        }
-        .goback{
-          position: absolute;
-          right: 40px;
-          top: 24px;
-        }
-        .goback1{
-          padding: 0 10px;
-        }
-        @media screen and (max-width: 640px){
-          .head .one{
-            display: none;
-          }
-          .goback{
-            display: none;
-          }
-          .logo{
-            display: none;
-          }
-        }
-        @media screen and (min-width: 640px){
-          .head .two{
-            display: none;
-          }
-          .goback1{
-            display: none;
-          }
-        }
-        .two_li dl dd{
-          padding-left: 20px;
-          border-bottom: 1px dashed #cccccc;
-        }
-    </style>
-
+    <link rel="stylesheet" href="../static/css/public.css">
+    <link rel="stylesheet" href="../static/css/details.css">
     <script src="../static/jquery-1.11.1.min.js"></script>
     <script src="../static/Highcharts-Stock-10.0.0/code/highstock.js"></script>
     <script src="../static/Highcharts-Stock-10.0.0/code/modules/exporting.js"></script>
@@ -138,18 +22,7 @@
   </head>
 <body>
 
-<!--<form action="/" method="post">-->
-<!--    <input type="text" name="search" placeholder="请输入sql查询语句">-->
-<!--    <button>查询</button>-->
-<!--</form>-->
-
-
-<!--<form action="/upload" method="post" enctype="multipart/form-data">-->
-<!--    <input type="file" name="file" value="上传">-->
-<!--    <button>上传</button>-->
-<!--</form>-->
-
-
+<!-- 头部 -->
 <div class="head">
   <span class="logo">Factor Kanban</span>
   <span class="layui-icon goback1" onclick="window.history.go(-1)">&#xe603;</span>
@@ -185,7 +58,7 @@
 
 
 
-
+<!-- 详细信息 -->
 <div class="layui-container">
   <div class="describe">
     <div>
@@ -219,13 +92,6 @@
 
 
 
-<style>
-    @media screen and (max-width: 640px){
-      .result li{
-        width: 33%;
-      }
-    }
-</style>
 <div class="layui-container">
   <div>
     <ul class="result">
@@ -287,15 +153,7 @@
   </div>
 </div>
 
-<style>
-  .main{
-    width: 100%;
-    height: 600px;
-    padding: 20px 0;
-    background: #ffffff;
-    margin-bottom: 10px;
-  }
-</style>
+<!-- 三维立体图表 -->
 <div class="layui-container">
   <div class="main" id="main"></div>
 </div>
@@ -348,21 +206,9 @@
       }
     })
 
-
-
-  
-
 </script>
 
-<style>
-  .item_list{
-    width: 100%;
-  }
-  .item_list .list_li{
-    width: 50%;
-    float: left;
-  }
-</style>
+
 
 <dir class="layui-container">
   <div class="item_list">
@@ -377,12 +223,7 @@
 <!-- 图表一 -->
 <script>
 function getData(n) {
-  var arr = [],
-      i,
-      a,
-      b,
-      c,
-      spike;
+  var arr = [],i,a,b,c,spike;
   for (i = 0; i < n; i = i + 1) {
       if (i % 100 === 0) {
           a = 2 * Math.random();
@@ -688,20 +529,7 @@ Highcharts.chart('list_li2', {
           text: 'Source: WorldClimate.com'
       },
       xAxis: {
-          categories: [
-              'Jan',
-              'Feb',
-              'Mar',
-              'Apr',
-              'May',
-              'Jun',
-              'Jul',
-              'Aug',
-              'Sep',
-              'Oct',
-              'Nov',
-              'Dec'
-          ],
+          categories: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
           crosshair: true
       },
       yAxis: {
@@ -744,14 +572,8 @@ Highcharts.chart('list_li2', {
   });
 </script>
 
-<style>
-  @media screen and (max-width: 640px){
-    .table_l{
-      width: 100%;
-    }
-  }
-</style>
-<!-- 底部数据列表 -->
+
+<!-- 因子数据列表 -->
 <div class="layui-container">
     <div class="table_l">
         <div class="title">
@@ -776,12 +598,10 @@ Highcharts.chart('list_li2', {
               </tr>
             </thead>
             <tbody class="list">
-                {% for i in table_data %}
-                    <tr>
-                        <td>{{ i[1] }}</td>
-                        <td>{{ i[2] }}</td>
-                    </tr>
-                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
             </tbody>
           </table>
     </div>
@@ -808,51 +628,16 @@ Highcharts.chart('list_li2', {
               </tr>
             </thead>
             <tbody class="list1">
-                {% for i in table_data %}
-                    <tr>
-                        <td>{{ i[1] }}</td>
-                        <td>{{ i[2] }}</td>
-                    </tr>
-                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
             </tbody>
           </table>
     </div>
 </div>
 <div style="clear: both;"></div>
-<style>
-  .footer{
-    width: 100%;
-    height: 260px;
-    background: #009688;
-    color: #ffffff;
-  }
-  .footer dl{
-    float: left;
-    padding: 20px 140px 20px 0;
-  }
-  .footer dl dt{
-    font-size: 20px;
-    line-height: 40px;
-  }
-  .footer dl dd{
-    line-height: 24px;
-  }
-  .footer p {
-    text-align: center;
-    margin-top: 20px;
-  }
-  @media screen and (max-width: 640px){
-    .footer dl{
-      float: left;
-      padding: 20px;
-    }
-  }
-  @media screen and (max-width: 1200px){
-    .footer .dl{
-      display: none;
-    }
-  }
-</style>
+<!-- 底部 -->
 <div class="footer">
   <div class="layui-container">
     <div>
@@ -888,6 +673,54 @@ Highcharts.chart('list_li2', {
 </div>
 </body>
 <script>
+    var arr_table = [];
+    var _html = '';
+    datainit('2019-12-06');
+
+    function datainit(value) {
+        // console.log(time)
+        let time= value.split('-').join('');
+        // console.log(time)
+      // let time= '20191206'
+          let _path = location.href.split('/')[4];
+          // console.log(_path)
+          $.ajax({
+              type:'post',
+              data:{"search":time,"_path":_path},
+              url:'http://127.0.0.1:5000/search',
+              success:function (data) {
+                // console.log(data.search('Empty'))
+                if(data.search('Empty') != -1){
+                    _html = '<tr><td>数据为空</td><td>数据为空</td></tr>';
+                }else{
+                    var a1 = data.split('\n')
+                    var a2;
+                    // console.log(a1)
+                    a1.shift()
+                    // console.log(a1)
+                    for (const key in a1) {
+                        // console.log(a1[key])
+                        a2 = a1[key].split('  ')
+                        a2.shift()
+                        arr_table.push(a2)
+                        // arr1 = a2
+                        // console.log(arr1)
+                    }
+                    // console.log(arr_table)
+                    for(var i = 0; i < arr_table.length; i++){
+                        _html += '<tr><td>'+arr_table[i][0]+'</td><td>'+arr_table[i][2]+'</td></tr>';
+
+                    }
+                    // console.log(arr_table[0]);
+                }
+                  $('.list').html(_html);
+                  _html = '';
+              }
+          })
+    }
+
+
+
 layui.use(['util'],function(){
   var layer = layui.layer,
       util = layui.util,
@@ -896,28 +729,11 @@ layui.use(['util'],function(){
   //日期
   laydate.render({
     elem: '#test1',
-      value: new Date('2015-01-05'),
+      value: new Date('2019-12-06'),
       isInitValue: true,
       done:function (value) {
-          let time= value.split('-').join('');
-          $.ajax({
-              type:'post',
-              data:{"search":time},
-              url:'http://127.0.0.1:5000/search',
-              success:function (data) {
-                    var _html = '';
-                    var list = JSON.parse(data);
-                    if(list.length == 0){
-                        _html = '<tr><td>本日为非交易日</td><td>数据为空</td></tr>';
-                    }else{
-                        for (var i = 0; i< list.length; i++){
-                            _html += '<tr><td>'+list[i][1]+'</td><td>'+list[i][2]+'</td></tr>';
-                        }
-                    }
-                   $('.list').html(_html);
-                    console.log(list)
-              }
-          })
+        // console.log(value)
+        datainit(value)
       }
   });
 
@@ -927,23 +743,41 @@ layui.use(['util'],function(){
     isInitValue: true,
     done:function (value) {
       let time= value.split('-').join('');
+      let _path = location.href.split('/')[4];
+      // console.log(time)
       $.ajax({
           type:'post',
-          data:{"search":time},
+          data:{"search":time,"_path":_path},
           url:'http://127.0.0.1:5000/search',
           success:function (data) {
-                var _html = '';
-                var list = JSON.parse(data);
-                if(list.length == 0){
-                    _html = '<tr><td>本日为非交易日</td><td>数据为空</td></tr>';
-                }else{
-                    for (var i = 0; i< list.length; i++){
-                        _html += '<tr><td>'+list[i][1]+'</td><td>'+list[i][2]+'</td></tr>';
-                    }
+            // console.log(data.search('Empty'))
+            if(data.search('Empty') != -1){
+                _html = '<tr><td>数据为空</td><td>数据为空</td></tr>';
+            }else{
+                var a1 = data.split('\n')
+                var a2;
+                // console.log(a1)
+                a1.shift()
+                // console.log(a1)
+                for (const key in a1) {
+                    // console.log(a1[key])
+                    a2 = a1[key].split('  ')
+                    a2.shift()
+                    arr_table.push(a2)
+                    // arr1 = a2
+                    // console.log(arr1)
                 }
-               $('.list1').html(_html);
-              }
-          })
+                // console.log(arr_table)
+                for(var i = 0; i < arr_table.length; i++){
+                    _html += '<tr><td>'+arr_table[i][0]+'</td><td>'+arr_table[i][2]+'</td></tr>';
+
+                }
+                // console.log(arr_table[0]);
+            }
+              $('.list1').html(_html);
+              _html = '';
+          }
+        })
       }
   });
 
