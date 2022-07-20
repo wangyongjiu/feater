@@ -71,25 +71,51 @@
         <span>质量类因子</span>
       </div>
       <div class="info_item">
-        <span>计算公式：</span>
+        <span>股票名字：</span>
         <span>净利润与营业总收入之比=净利润（TTM）/营业总收入（TTM）</span>
       </div>
       <div class="info_item">
-        <span>更新时间：</span>
+        <span>更新频率：</span>
         <span>下一交易日早晨9:00前更新</span>
       </div>
       <div class="info_item">
-        <span>数据处理：</span>
+        <span>数据量：</span>
         <span>中位数去极值 -> 行业市值对数中性化 -> zscore标准化</span>
       </div>
       <div class="info_item">
-        <span>默认参数：</span>
+        <span>最后时间：</span>
         <span>加权方式为按市值加权</span>
       </div>
     </div>
   </div>
 </div>
-
+<script>
+ let des_obj = {
+    "LSTM-F2-D-M6":"LSTM-P2-43&44-M6-1906",
+    "GRU-F2-D-M3":"GRU-P2-43&44-M3-1903",
+    "TCN-F2-D-M3":"TCN-P2-43&44-M3-1903",
+    "CNN-F2-D-M6":"CNN-P2-43&44-M6-1906",
+    "TRANS-F2-D-M6":"TRANS-P2-43&44-M6-1906",
+    "HAN-F2-D-M6":"HAN-P2-43&44-M6-1906"
+}
+  $.ajax({
+    type:'get',
+    url:'/des',
+    success:function(data){
+      data = JSON.parse(data);
+        // console.log(data)
+      let title =  location.href.split('/')[4];
+      // console.log(des_obj);
+      let des =  data[des_obj[title]];
+      $('.describe h1').html(des['title']);
+      $('.describe .info_item:eq(0) span:eq(1)').html(des['meta']);
+      $('.describe .info_item:eq(1) span:eq(1)').html(des['algo']);
+      $('.describe .info_item:eq(2) span:eq(1)').html(des['freq']);
+      $('.describe .info_item:eq(3) span:eq(1)').html(des['vol']);
+      $('.describe .info_item:eq(4) span:eq(1)').html(des['end']);
+    }
+  })
+</script>
 
 
 <div class="layui-container">

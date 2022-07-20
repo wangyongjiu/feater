@@ -22,13 +22,7 @@ def index():
 # 详情页显示
 @app.route('/details/<string:details>',methods=['GET','POST'])
 def details(details):
-    details_path = './utils/' + details + '.f'
-    search = request.form.get('search')
-    if search:
-        table_data = Factors(details_path).quary_F_bydate(date=search)
-    else:
-        table_data = Factors(details_path).quary_F_bydate(date=20191206)
-    return render_template('details.html', table_data=table_data,details=details)
+    return render_template('details.html',details=details)
 
 
 
@@ -52,7 +46,12 @@ def formsub():
         # print(i[2])
     return str(pool_all)
 
-
+# details页---描述信息----数据接口
+@app.route('/des',methods=['GET','POST'])
+def des():
+    des_data = json.load(open('./static/data/factor_description.json', 'r', encoding='utf-8'))
+    # print(des_data)
+    return json.dumps(des_data)
 
 # details页---三维立体echarts图形展示----数据接口
 @app.route('/echarts',methods=['GET','POST'])

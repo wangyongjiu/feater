@@ -26,6 +26,9 @@
   .Factor a{
     color: #4184e1;
   }
+ .layui-table th{
+    text-align: right;
+  }
   @media screen and (max-width: 640px){
     .head .one{
       display: none;
