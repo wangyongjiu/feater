@@ -3,7 +3,7 @@ import json
 import csv
 import pandas as pd
 from flask import *
-from Factor_utils import Factors, Factor_board, get_path_list, filter_factors, generate_query_statement, get_json
+from Factor_utils import Factors, Factor_board, get_path_list, filter_factors, generate_query_statement, get_json,get_plot_data
 
 app = Flask(__name__,static_folder="static")
 
@@ -34,6 +34,11 @@ def index():
 @app.route('/details/<string:details>',methods=['GET','POST'])
 def details(details):
     return render_template('details.html',details=details)
+
+# 搜索页面
+@app.route('/search',methods=['GET', 'POST'])
+def search():
+    return render_template('search.html')
 
 
 # 数据接口
@@ -125,6 +130,22 @@ def page():
     # print(res)
     return json.dumps(res)
 
+# 首页 --- echarts表格 ---- 数据接口
+@app.route('/indexEcharts',methods=['GET','POST'])
+def indexEcharts():
+    y = request.args.get('y_axis')
+    x = request.args.get('x_axis')
+    if y != '':
+        y='GRU-P2-43&44-M12-1912'
+    if x == '':
+        x="TCN-P2-43&44-M12-1912"
+    path_list = get_path_list(factor_list=filter_factors(query_statement=generate_query_statement(),factor_description=factor_description),factor_path=factor_path)
+    result=get_plot_data(df=Factor_board(path_list=path_list).factor_board,x=x,y=y)
+    for key in range(len(result)):
+        result[key].insert(0,str(key))
+
+    return jsonify(result)
+
 
 
 # details页---描述信息----数据接口
@@ -141,8 +162,8 @@ def echarts():
     return jsonify(arr)
 
 # details页----按时间查询股票因子-----接口
-@app.route('/search',methods=['GET', 'POST'])
-def search():
+@app.route('/dateSearch',methods=['GET', 'POST'])
+def dateSearch():
     search = request.form.get('search')
     detail_path = './data/' + request.form.get('_path') + '.f'
     # print(search)

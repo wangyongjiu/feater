@@ -29,15 +29,17 @@
     <li class="layui-nav-item" onclick="showmodel()">专家信息</li>
     <li class="layui-nav-item" onclick="showmodel()">园区信息</li>
     <li class="layui-nav-item" onclick="showmodel()">自助评级</li>
-    <li class="layui-nav-item"><a href="http://ipoipo.cn/" style="padding: 0;color: #ffffff;">行业研究</a></li>
-    <li class="layui-nav-item"><a href="https://bigquant.com/wiki/home" style="padding: 0;color: #ffffff;">量化研究</a></li>
-    <li class="layui-nav-item">首页</li>
+    <li class="layui-nav-item"><a href="http://ipoipo.cn/">行业研究</a></li>
+    <li class="layui-nav-item"><a href="https://bigquant.com/wiki/home">量化研究</a></li>
+    <li class="layui-nav-item"><a href="/">首页</a></li>
+    <li><a href="/search" class="layui-icon" style="color: #ffffff;">&#xe615;</a></li>
   </ul>
   <ul class="two">
     <li class="layui-nav-item two_li">
       <i class="layui-icon" style="padding: 0 0 0 20px;">&#xe671;</i>
       <dl class="layui-nav-child">
-        <dd><a href="javascript:;">首页</a></dd>
+        <dd><a href="/search"><i class="layui-icon" class="">&#xe615;</i></a></dd>
+        <dd><a href="/">首页</a></dd>
         <dd><a href="https://bigquant.com/wiki/home">量化研究</a></dd>
         <dd><a href="http://ipoipo.cn/">行业研究</a></dd>
         <dd><a href="javascript:;" onclick="showmodel()">自助评级</a></dd>
@@ -242,7 +244,7 @@
     $.ajax({
       type:'post',
       data:{"search":time,"_path":_path},
-      url:'/search',
+      url:'/dateSearch',
       success:function (data) {
         // console.log(data)
         for(var i = 0; i < data.length; i++){

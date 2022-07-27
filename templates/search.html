@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="聚宽让量化交易的成长之路更为平坦，聚宽让做量化交易的成本极大降低">
+    <meta name="keywords" content="因子看板、研究策略、本地数据、量化聚宽">
+    <meta name="robots" content="all" />
+    <link rel="shortcut icon" href="../static/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../static/css/public.css">
+    <link rel="stylesheet" href="../static/css/search.css">
+    <script src="../static/jquery-1.11.1.min.js"></script>
+    <script src="../static/layui/layui.js"></script>
+</head>
+
+<body>
+    <!-- 头部 -->
+    <div class="head">
+        <span class="logo">AI因子看板</span>
+        <ul class="layui-nav one">
+            <li class="layui-nav-item" onclick="showmodel()">专家信息</li>
+            <li class="layui-nav-item" onclick="showmodel()">园区信息</li>
+            <li class="layui-nav-item" onclick="showmodel()">自助评级</li>
+            <li class="layui-nav-item"><a href="http://ipoipo.cn/">行业研究</a></li>
+            <li class="layui-nav-item"><a href="https://bigquant.com/wiki/home">量化研究</a></li>
+            <li class="layui-nav-item"><a href="/">首页</a></li>
+            <li><a href="/search" class="layui-icon" style="color: #ffffff;">&#xe615;</a></li>
+        </ul>
+        <ul class="two">
+            <li class="layui-nav-item two_li">
+                <i class="layui-icon" style="padding: 0 0 0 20px;">&#xe671;</i>
+                <dl class="layui-nav-child">
+                    <dd><a href="/search"><i class="layui-icon" class="">&#xe615;</i></a></dd>
+                    <dd><a href="/">首页</a></dd>
+                    <dd><a href="https://bigquant.com/wiki/home">量化研究</a></dd>
+                    <dd><a href="http://ipoipo.cn/">行业研究</a></dd>
+                    <dd><a href="javascript:;" onclick="showmodel()">自助评级</a></dd>
+                    <dd><a href="javascript:;" onclick="showmodel()">园区信息</a></dd>
+                    <dd><a href="javascript:;" onclick="showmodel()">专家信息</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <div style="clear: both;"></div>
+    </div>
+    <div style="height: 70px;"></div>
+    <script>
+        $('.two_li').click(function () {
+            $('.two_li dl').toggle()
+        })
+    </script>
+
+
+
+    <!-- search -->
+    <div class="layui-container" style="width: 90%;">
+        <div class="search">
+            <div class="search_logo">
+                <img src="../static/images/logo.png" alt="">
+            </div>
+            <div class="search_main">
+                <div class="search_box">
+                    <input type="text" class="search_inp" placeholder="搜索:量化联赛、kaggle、交易" onkeydown="enterSub(event)">
+                    <span class="layui-icon search_sub" onclick="searchSub()">&#xe615;</span>
+                </div>
+            </div>
+            <div>
+                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="position: relative;">
+                    <ul class="layui-tab-title" style="padding:0 40px;">
+                        <li class="layui-this" style="padding: 0;">比赛</li>
+                        <li style="padding: 0;">论坛</li>
+                    </ul>
+                    <div class="result">
+                        搜索 <span>10</span> 结果
+                    </div>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            <div style="height: 360px;" class="posi"></div>
+                            <ul class="search_ul_one">
+                                <li style="padding: 20px;">
+                                    <div>
+                                        <div class="_left">
+                                            <img src="../static/images/list_img.jpg" alt="" width="250" height="160">
+                                        </div>
+                                        <div class="_right">
+                                            <h1>第一届“UBQUANT CHALLENGE” 量化交易大赛</h1>
+                                            <p style="height: 100px;">
+                                                本届大赛旨在让参赛者在完全的仿照实战环境环境中，体验量化交易包括数据处理、量化交易系统设计、量化策略开发、订单优化方面的具体流程。
+                                                本届大赛旨在让参赛者在完全的仿照实战环境环境中，体验量化交易包括数据处理、量化交易系统设计、量化策略开发、订单优化方面的具体流程。
+                                                本届大赛旨在让参赛者在完全的仿照实战环境环境中，体验量化交易包括数据处理、量化交易系统设计、量化策略开发、订单优化方面的具体流程。
+                                                本届大赛旨在让参赛者在完全的仿照实战环境环境中，体验量化交易包括数据处理、量化交易系统设计、量化策略开发、订单优化方面的具体流程。
+                                                本届大赛旨在让参赛者在完全的仿照实战环境环境中，体验量化交易包括数据处理、量化交易系统设计、量化策略开发、订单优化方面的具体流程。
+                                                本届大赛旨在让参赛者在完全的仿照实战环境环境中，体验量化交易包括数据处理、量化交易系统设计、量化策略开发、订单优化方面的具体流程。
+                                            </p>
+                                            <div>
+                                                比赛结束时间
+                                                <span>2017/11/2</span>
+                                                参赛团队
+                                                <span>3</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="clear: both;"></div>
+                                </li>
+                            </ul>
+                            <ul class="search_ul_two">
+                                <li>
+                                    <div style="text-align: center;">
+                                        <img src="../static/images/nodata.png" alt="" height="280">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="layui-tab-item">2论坛</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function searchSub(){
+            let search_inp = $.trim($('.search_inp').val())
+            console.log(search_inp)
+            if(search_inp == ''){
+                $('.search_ul_two').show();
+                $('.search_ul_one').hide();
+            }else{
+                $('.search_ul_two').hide();
+                $('.search_ul_one').show();
+            }
+            $('.posi').hide();
+        }
+        function enterSub(e){
+            if(e.keyCode == 13){
+                searchSub()
+            }
+        }
+    </script>
+
+
+    <!-- 底部 -->
+    <div class="footer">
+        <div class="layui-container">
+            <div>
+                <dl class="dl">
+                    <dt>关于</dt>
+                    <dd><a href="http://www.tafirt.org/about.html" target="_blank" rel="noopener noreferrer">关于我们</a>
+                    </dd>
+                    <dd><a href="http://www.tafirt.org/coalize.html" target="_blank" rel="noopener noreferrer">加入我们</a>
+                    </dd>
+                    <dd><a href="http://www.tafirt.org/contact.html" target="_blank" rel="noopener noreferrer">联系我们</a>
+                    </dd>
+                </dl>
+                <dl class="dl">
+                    <dt>帮助</dt>
+                    <dd onclick="showmodel()">常见问题</dd>
+                    <dd onclick="showmodel()">API文档</dd>
+                </dl>
+                <dl class="dl">
+                    <dt>友情链接</dt>
+                    <dd><a href="http://www.ia.cas.cn/" target="_blank" rel="noopener noreferrer">中国科学院自动化研究所</a></dd>
+                    <dd><a href="http://www.ia.cas.cn/jgsz/kyxt/ZNGZ/" target="_blank"
+                            rel="noopener noreferrer">智能感知与计算研究中心</a></dd>
+                    <dd><a href="https://www.csc108.com/comOverView/introduce.jspx" target="_blank"
+                            rel="noopener noreferrer">中信建投证券</a></dd>
+                </dl>
+                <dl>
+                    <dt>关注我们</dt>
+                    <img src="../static/images/qrcode.png" alt="">
+                    <dd style="text-align: center">微信公众号</dd>
+                </dl>
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+        <p style="color: #000000;">@2022 津icp备15002249号-6</p>
+    </div>
+
+    <style>
+        input,
+        select {
+            border: none;
+        }
+    </style>
+    <!-- 弹框 -->
+    <div class="mask"></div>
+    <form class="model_f qr_login">
+        <div class="model_logo">
+            <img src="../static/images/logo.png" alt="">
+            <span>TAFIRT</span>
+        </div>
+        <div class="model_title">
+            验证码登录/注册
+        </div>
+        <div class="group">
+            <select name="" id="sel" required>
+                <option value="+86">+86</option>
+                <option value="+86">中国+86</option>
+                <option value="+86">中国香港特别行政区+852</option>
+            </select>
+            <input type="number" class="int iphone" required placeholder="手机号">
+        </div>
+        <div class="group">
+            <input type="text" class="int graphical" required placeholder="获取验证码">
+            <img src="" alt="">
+        </div>
+        <div class="group">
+            <input type="text" class="int qrcode" required placeholder="验证码">
+            <span>获取验证码</span>
+        </div>
+        <div class="group gologin">
+            <button class="layui-btn layui-btn-fluid">登录</button><br />
+            <a href="javascript:;" class="" style="padding-bottom: 20px;" onclick="goreg()">密码登录 ></a>
+        </div>
+    </form>
+
+    <form class="model_f pass_login">
+        <div class="model_logo">
+            <img src="../static/images/logo.png" alt="">
+            <span>TAFIRT</span>
+        </div>
+        <div class="model_title">
+            密码登录
+        </div>
+        <div class="group">
+            <input type="number" class="int" required placeholder="手机/邮箱/用户名" style="width: 340px;">
+        </div>
+        <div class="group">
+            <input type="password" class="int" required placeholder="密码" style="width: 340px;">
+        </div>
+        <div class="group">
+            <input type="text" class="int qrcode" required placeholder="验证码">
+            <img src="" alt="">
+        </div>
+        <div class="group gologin">
+            <button class="layui-btn layui-btn-fluid">登录</button><br />
+            <a href="javascript:;" class="" style="padding-bottom: 20px;float: left;">忘记密码?</a>
+            <a href="javascript:;" class="" style="padding-bottom: 20px;float: right;" onclick="gologin()">验证码登录/注册
+                ></a>
+        </div>
+    </form>
+
+</body>
+<script>
+    layui.use(['util'], function () {
+        var layer = layui.layer,
+            util = layui.util,
+            element = layui.element;
+        laydate = layui.laydate;
+        //返回顶部
+        util.fixbar({
+            bar1: false
+            , bar2: false
+            , css: { right: 10, bottom: 30 }
+            , bgcolor: '#009688'
+        });
+    });
+
+    $('.mask').click(function () {
+        $('.pass_login,.qr_login').hide();
+        $(this).hide();
+    })
+    function showmodel() {
+        $('.qr_login,.mask').show();
+    }
+    function goreg() {
+        $('.pass_login').show();
+    }
+    function gologin() {
+        $('.pass_login').hide();
+        $('.qr_login').show();
+    }
+</script>
+</body>
+
+</html>

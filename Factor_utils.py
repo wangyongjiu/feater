@@ -216,6 +216,20 @@ def get_json(df: pd.DataFrame, toStr: bool = True) -> list:
         pass
     return df.to_dict("dict")
 
+def get_plot_data(df: pd.DataFrame, x: str, y: str) -> list:
+    '''
+
+    :param df:
+    :param x:
+    :param y:
+    :return:
+    '''
+    df = df.loc[:, [x, y]]
+    l = df.values.tolist()
+    l.insert(0, list(df))
+    return l
+
+
 
 
 if __name__ == '__main__':
@@ -247,10 +261,16 @@ if __name__ == '__main__':
     factor_path = r"C:\Users\Administrator\Desktop\feather\data"
 
     # 根据dict字典中的检索条件Query，返回值是查询到因子文件的绝对路径
-    path_list = get_path_list(factor_list=filter_factors(query_statement=generate_query_statement(dict=dict), factor_description=factor_description), factor_path=factor_path)
+    path_list = get_path_list(factor_list=filter_factors(query_statement=generate_query_statement(), factor_description=factor_description), factor_path=factor_path)
     # 利用因子绝对路径的list生成因子看板数据
-    result = get_json(Factor_board(path_list=path_list).factor_board)
-    print(result)
+    # result = get_json(Factor_board(path_list=path_list).factor_board)
+    # print(result)
 
     # result = Factor_board(LSTM_path=path_LSTM, GRU_path=path_GRU, TCN_path=path_TCN, CNN_path=path_CNN,TRANS_path=path_TRANS, HAN_path=path_HAN).JSON
     # r=result.get_json(result)
+
+
+    x="TCN-P2-43&44-M12-1912"
+    y='GRU-P2-43&44-M12-1912'
+    result=get_plot_data(df=Factor_board(path_list=path_list).factor_board,x=x,y=y)
+    print(result)
