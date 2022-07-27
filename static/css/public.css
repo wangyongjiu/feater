@@ -35,7 +35,7 @@ html,body{
   }
   .footer dl{
     float: left;
-    padding: 20px 140px 20px 0;
+    padding: 20px 180px 20px 0;
   }
   .footer dl dt{
     font-size: 20px;
@@ -48,6 +48,9 @@ html,body{
     text-align: center;
     margin-top: 20px;
   }
+.footer a{
+      color: #ffffff;
+  }
   @media screen and (max-width: 640px){
     .footer dl{
       float: left;
@@ -58,4 +61,83 @@ html,body{
     .footer .dl{
       display: none;
     }
+  }
+
+  /* 弹框 */
+  .mask{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 20;
+    background: #f1f2f7;
+    display: none;
+  }
+  .model_f{
+    width: 358px;
+    position: fixed;
+    left: 50%;
+    right: 0;
+    top: 50%;
+    bottom: 0;
+    z-index: 50;
+    transform: translate(-50%,-50%);
+    padding: 30px;
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+  }
+  .model_f .group{
+    margin-bottom: 25px;
+  }
+  .model_logo{
+    text-align: center;
+    height: 42px;
+    margin-bottom: 34px;
+
+  }
+  .model_logo img{
+    width: 42px;
+    line-height: 42px;
+  }
+  .model_logo span{
+    font-size: 24px;
+    color: #009688;
+  }
+  .model_title{
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 24px;
+    line-height: 22px;
+    font-weight: 500;
+  }
+  .int{
+    height: 50px;
+    line-height: 50px;
+    border: 1px solid #d9d9d9;
+    font-size: 16px;
+    padding-left: 15px;
+  }
+  #sel{
+    height: 50px;
+    line-height: 50px;
+    width: 86px;
+    border: 1px solid #d9d9d9;
+    font-weight: 700;
+  }
+  .iphone{
+    width: 238px;
+    margin-left: 10px;
+  }
+  .graphical,.qrcode{
+    width: 174px;
+  }
+  .gologin{
+    text-align: center;
+  }
+  .qrcode{
+    margin-right: 20px;
+  }
+  .pass_login,.qr_login{
+    display: none;
   }

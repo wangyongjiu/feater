@@ -24,14 +24,13 @@
 
 <!-- 头部 -->
 <div class="head">
-  <span class="logo">Factor Kanban</span>
-  <span class="layui-icon goback1" onclick="window.history.go(-1)">&#xe603;</span>
+  <span class="logo">AI因子看板</span>
   <ul class="layui-nav one">
-    <li class="layui-nav-item">专家信息</li>
-    <li class="layui-nav-item">园区信息</li>
-    <li class="layui-nav-item">自助评级</li>
-    <li class="layui-nav-item">行业研究</li>
-    <li class="layui-nav-item">研究策略</li>
+    <li class="layui-nav-item" onclick="showmodel()">专家信息</li>
+    <li class="layui-nav-item" onclick="showmodel()">园区信息</li>
+    <li class="layui-nav-item" onclick="showmodel()">自助评级</li>
+    <li class="layui-nav-item"><a href="http://ipoipo.cn/" style="padding: 0;color: #ffffff;">行业研究</a></li>
+    <li class="layui-nav-item"><a href="https://bigquant.com/wiki/home" style="padding: 0;color: #ffffff;">量化研究</a></li>
     <li class="layui-nav-item">首页</li>
   </ul>
   <ul class="two">
@@ -39,11 +38,11 @@
       <i class="layui-icon" style="padding: 0 0 0 20px;">&#xe671;</i>
       <dl class="layui-nav-child">
         <dd><a href="javascript:;">首页</a></dd>
-        <dd><a href="javascript:;">研究策略</a></dd>
-        <dd><a href="javascript:;">行业研究</a></dd>
-        <dd><a href="javascript:;">自助评级</a></dd>
-        <dd><a href="javascript:;">园区信息</a></dd>
-        <dd><a href="javascript:;">专家信息</a></dd>
+        <dd><a href="https://bigquant.com/wiki/home">量化研究</a></dd>
+        <dd><a href="http://ipoipo.cn/">行业研究</a></dd>
+        <dd><a href="javascript:;" onclick="showmodel()">自助评级</a></dd>
+        <dd><a href="javascript:;" onclick="showmodel()">园区信息</a></dd>
+        <dd><a href="javascript:;" onclick="showmodel()">专家信息</a></dd>
       </dl>
     </li>
   </ul>
@@ -59,66 +58,58 @@
 
 
 <!-- 详细信息 -->
-<div class="layui-container">
+<div class="layui-container" style="width: 100%;">
+  
   <div class="describe">
     <div>
       <button class="layui-btn goback" onclick="window.history.go(-1)">返回上一页</button>
-      <h1>{{details}}净利润与营业总收入之比
-          net_profit_to_total_
-          operate_revenue_ttm</h1>
+      <h1>{{details}}</h1>
       <div class="info_item">
-        <span>因子类别：</span>
-        <span>质量类因子</span>
+        <span>meta：</span>
+        <span></span>
       </div>
       <div class="info_item">
-        <span>股票名字：</span>
-        <span>净利润与营业总收入之比=净利润（TTM）/营业总收入（TTM）</span>
+        <span>algo：</span>
+        <span></span>
       </div>
       <div class="info_item">
-        <span>更新频率：</span>
-        <span>下一交易日早晨9:00前更新</span>
+        <span>freq：</span>
+        <span></span>
       </div>
       <div class="info_item">
-        <span>数据量：</span>
-        <span>中位数去极值 -> 行业市值对数中性化 -> zscore标准化</span>
+        <span>vol：</span>
+        <span></span>
       </div>
       <div class="info_item">
-        <span>最后时间：</span>
-        <span>加权方式为按市值加权</span>
+        <span>end：</span>
+        <span></span>
       </div>
     </div>
   </div>
 </div>
 <script>
- let des_obj = {
-    "LSTM-F2-D-M6":"LSTM-P2-43&44-M6-1906",
-    "GRU-F2-D-M3":"GRU-P2-43&44-M3-1903",
-    "TCN-F2-D-M3":"TCN-P2-43&44-M3-1903",
-    "CNN-F2-D-M6":"CNN-P2-43&44-M6-1906",
-    "TRANS-F2-D-M6":"TRANS-P2-43&44-M6-1906",
-    "HAN-F2-D-M6":"HAN-P2-43&44-M6-1906"
-}
+ var title =  location.href.split('/')[4];
   $.ajax({
     type:'get',
     url:'/des',
+    data:{'title':title},
     success:function(data){
-      data = JSON.parse(data);
-        // console.log(data)
-      let title =  location.href.split('/')[4];
-      // console.log(des_obj);
-      let des =  data[des_obj[title]];
-      $('.describe h1').html(des['title']);
-      $('.describe .info_item:eq(0) span:eq(1)').html(des['meta']);
-      $('.describe .info_item:eq(1) span:eq(1)').html(des['algo']);
-      $('.describe .info_item:eq(2) span:eq(1)').html(des['freq']);
-      $('.describe .info_item:eq(3) span:eq(1)').html(des['vol']);
-      $('.describe .info_item:eq(4) span:eq(1)').html(des['end']);
-    }
+        // console.log(data);
+      $('.describe h1').html(data['title']);
+      $('.describe .info_item:eq(0) span:eq(1)').html(data['meta']);
+      $('.describe .info_item:eq(1) span:eq(1)').html(data['algo']);
+      $('.describe .info_item:eq(2) span:eq(1)').html(data['freq']);
+      $('.describe .info_item:eq(3) span:eq(1)').html(data['vol']);
+      $('.describe .info_item:eq(4) span:eq(1)').html(data['end']);
+    },
+      error:function (err) {
+        layer.msg('出错啦')
+      }
   })
 </script>
 
 
-<div class="layui-container">
+<div class="layui-container" style="width: 100%;">
   <div>
     <ul class="result">
       <li>
@@ -138,7 +129,7 @@
 </div>
 
 
-<div class="layui-container">
+<div class="layui-container" style="width: 100%;">
   <div class="table_factor" style="overflow: auto;">
     <table class="layui-table">
       <thead>
@@ -179,23 +170,145 @@
   </div>
 </div>
 
+<!-- 因子数据列表 -->
+<div class="layui-container" style="width: 100%;">
+  <div class="table_l">
+      <div class="title">
+          <span class="l">
+            因子值最大的10只股票
+          </span>
+          <span class="r">
+            <i id="test1"></i>更新
+          </span>
+          <div style="clear: both;"></div>
+      </div>
+       <table class="layui-table">
+          <colgroup>
+            <col width="150">
+            <col width="200">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th>stockcode</th>
+              <th>alpha</th>
+            </tr>
+          </thead>
+          <tbody class="list1">
+              <tr>
+                  <td></td>
+                  <td></td>
+              </tr>
+          </tbody>
+        </table>
+  </div>
+  <div class="table_l">
+          <div class="title">
+              <span class="l">
+                  因子值最大的10只股票
+              </span>
+              <span class="r">
+                  <i id="test2"></i>更新
+              </span>
+              <div style="clear: both;"></div>
+          </div>
+        <table class="layui-table">
+          <colgroup>
+            <col width="150">
+            <col width="200">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th>stockcode</th>
+              <th>alpha</th>
+            </tr>
+          </thead>
+          <tbody class="list2">
+              <tr>
+                  <td></td>
+                  <td></td>
+              </tr>
+          </tbody>
+        </table>
+  </div>
+</div>
+<div style="clear: both;"></div>
+<script>
+  function datainit(value,el) {
+    let _html = '';
+    let time= value.split('-').join('');
+    let _path = location.href.split('/')[4];
+    $.ajax({
+      type:'post',
+      data:{"search":time,"_path":_path},
+      url:'/search',
+      success:function (data) {
+        // console.log(data)
+        for(var i = 0; i < data.length; i++){
+            _html += '<tr><td>'+data[i]['stockcode']+'</td><td>'+data[i]['alpha']+'</td></tr>';
+        }
+        $(el).html(_html);
+        _html = '';
+      },
+        error:function (err) {
+            layer.msg('出错啦')
+        }
+    })
+  }
+
+
+  datainit('2019-12-06','.list1');
+  datainit('2019-12-19','.list2');
+
+  layui.use(['util'],function(){
+    var layer = layui.layer,
+      util = layui.util,
+      element = layui.element,
+      laydate = layui.laydate;
+      //日期
+      laydate.render({
+          elem: '#test1',
+          value: new Date('2019-12-06'),
+          isInitValue: true,
+          done:function (value) {
+          // console.log(value)
+              datainit(value,'.list1')
+          }
+      });
+
+      laydate.render({
+          elem: '#test2',
+          value: new Date(),
+          isInitValue: true,
+          done:function (value) {
+              datainit(value,'.list2')
+          }
+      });
+
+      //返回顶部
+      util.fixbar({
+          bar1: false
+          ,bar2: false
+          ,css: {right: 10, bottom: 30}
+          ,bgcolor: '#009688'
+      });
+  });
+</script>
+
 <!-- 三维立体图表 -->
-<div class="layui-container">
+<div class="layui-container" style="width: 100%;">
   <div class="main" id="main"></div>
 </div>
 <script>
-
     var chartDom = document.getElementById('main');
     var myChart = echarts.init(chartDom);
     var option;
-
     $.ajax({
       type:'get',
-      url:'http://127.0.0.1:5000/echarts',
+      url:'/echarts',
       success:function(data){
-        data = JSON.parse(data)
         // console.log(data)
-
         var symbolSize = 2.5;
         option = {
           grid3D: {},
@@ -228,7 +341,6 @@
           ]
         };
         myChart.setOption(option);
-
       }
     })
 
@@ -236,7 +348,7 @@
 
 
 
-<dir class="layui-container">
+<dir class="layui-container" style="width: 100%;">
   <div class="item_list">
     <div class="list_li" id="list_li1"></div>
     <div class="list_li" id="list_li2"></div>
@@ -599,223 +711,114 @@ Highcharts.chart('list_li2', {
 </script>
 
 
-<!-- 因子数据列表 -->
-<div class="layui-container">
-    <div class="table_l">
-        <div class="title">
-            <span class="l">
-              因子值最大的10只股票
-            </span>
-            <span class="r">
-              <i id="test1"></i>更新
-            </span>
-            <div style="clear: both;"></div>
-        </div>
-         <table class="layui-table">
-            <colgroup>
-              <col width="150">
-              <col width="200">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th>stockcode</th>
-                <th>alpha</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-                <tr>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-          </table>
-    </div>
-    <div class="table_l">
-            <div class="title">
-                <span class="l">
-                    因子值最大的10只股票
-                </span>
-                <span class="r">
-                    <i id="test2"></i>更新
-                </span>
-                <div style="clear: both;"></div>
-            </div>
-          <table class="layui-table">
-            <colgroup>
-              <col width="150">
-              <col width="200">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th>stockcode</th>
-                <th>alpha</th>
-              </tr>
-            </thead>
-            <tbody class="list1">
-                <tr>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-          </table>
-    </div>
-</div>
-<div style="clear: both;"></div>
 <!-- 底部 -->
 <div class="footer">
   <div class="layui-container">
     <div>
       <dl class="dl">
         <dt>关于</dt>
-        <dd>关于我们</dd>
-        <dd>加入我们</dd>
-        <dd>联系我们</dd>
+        <dd><a href="http://www.tafirt.org/about.html" target="_blank" rel="noopener noreferrer">关于我们</a></dd>
+        <dd><a href="http://www.tafirt.org/coalize.html" target="_blank" rel="noopener noreferrer">加入我们</a></dd>
+        <dd><a href="http://www.tafirt.org/contact.html" target="_blank" rel="noopener noreferrer">联系我们</a></dd>
       </dl>
       <dl class="dl">
         <dt>帮助</dt>
-        <dd>常见问题</dd>
-        <dd>API文档</dd>
+        <dd onclick="showmodel()">常见问题</dd>
+        <dd onclick="showmodel()">API文档</dd>
       </dl>
       <dl class="dl">
         <dt>友情链接</dt>
-        <dd>果仁网</dd>
+        <dd><a href="http://www.ia.cas.cn/" target="_blank" rel="noopener noreferrer">中国科学院自动化研究所</a></dd>
+        <dd><a href="http://www.ia.cas.cn/jgsz/kyxt/ZNGZ/" target="_blank" rel="noopener noreferrer">智能感知与计算研究中心</a></dd>
+        <dd><a href="https://www.csc108.com/comOverView/introduce.jspx" target="_blank" rel="noopener noreferrer">中信建投证券</a></dd>
       </dl>
       <dl>
         <dt>关注我们</dt>
-        <dd>知乎专栏</dd>
-        <dd>雪球</dd>
-        <dd>新浪微博</dd>
-      </dl>
-      <dl>
-          <img src="../static/images/qrcode.png" alt="">
-          <dd style="text-align: center">微信公众号</dd>
+        <img src="../static/images/qrcode.png" alt="">
+        <dd style="text-align: center">微信公众号</dd>
       </dl>
     </div>
   </div>
   <div style="clear: both;"></div>
-  <p>@2022 津icp备170xxxxxxx号-6</p>
+  <p style="color: #000000;">@2022 津icp备170xxxxxxx号-6</p>
 </div>
+<style>
+  input,select{
+    border: none;
+  }
+</style>
+<!-- 弹框 -->
+<div class="mask"></div>
+<form class="model_f qr_login">
+  <div class="model_logo">
+    <img src="../static/images/logo.png" alt="">
+    <span>TAFIRT</span>
+  </div>
+  <div class="model_title">
+    验证码登录/注册
+  </div>
+  <div class="group">
+    <select name="" id="sel" required>
+      <option value="+86">+86</option>
+      <option value="+86">中国+86</option>
+      <option value="+86">中国香港特别行政区+852</option>
+    </select>
+    <input type="number" class="int iphone" required placeholder="手机号">
+  </div>
+  <div class="group">
+    <input type="text" class="int graphical" required placeholder="获取验证码">
+    <img src="" alt="">
+  </div>
+  <div class="group">
+    <input type="text" class="int qrcode" required placeholder="验证码">
+    <span>获取验证码</span>
+  </div>
+  <div class="group gologin">
+    <button class="layui-btn layui-btn-fluid">登录</button><br/>
+    <a href="javascript:;" class="" style="padding-bottom: 20px;" onclick="goreg()">密码登录 ></a>
+  </div>
+</form>
+
+<form class="model_f pass_login">
+  <div class="model_logo">
+    <img src="../static/images/logo.png" alt="">
+    <span>TAFIRT</span>
+  </div>
+  <div class="model_title">
+    密码登录
+  </div>
+  <div class="group">
+    <input type="number" class="int" required placeholder="手机/邮箱/用户名" style="width: 340px;">
+  </div>
+  <div class="group">
+    <input type="password" class="int" required placeholder="密码" style="width: 340px;">
+  </div>
+  <div class="group">
+    <input type="text" class="int qrcode" required placeholder="验证码">
+    <img src="" alt="">
+  </div>
+  <div class="group gologin">
+    <button class="layui-btn layui-btn-fluid">登录</button><br/>
+    <a href="javascript:;" class="" style="padding-bottom: 20px;float: left;">忘记密码?</a>
+    <a href="javascript:;" class="" style="padding-bottom: 20px;float: right;" onclick="gologin()">验证码登录/注册 ></a>
+  </div>
+</form>
+
 </body>
 <script>
-    var arr_table = [];
-    var _html = '';
-    datainit('2019-12-06');
-
-    function datainit(value) {
-        // console.log(time)
-        let time= value.split('-').join('');
-        // console.log(time)
-      // let time= '20191206'
-          let _path = location.href.split('/')[4];
-          // console.log(_path)
-          $.ajax({
-              type:'post',
-              data:{"search":time,"_path":_path},
-              url:'http://127.0.0.1:5000/search',
-              success:function (data) {
-                // console.log(data.search('Empty'))
-                if(data.search('Empty') != -1){
-                    _html = '<tr><td>数据为空</td><td>数据为空</td></tr>';
-                }else{
-                    var a1 = data.split('\n')
-                    var a2;
-                    // console.log(a1)
-                    a1.shift()
-                    // console.log(a1)
-                    for (const key in a1) {
-                        // console.log(a1[key])
-                        a2 = a1[key].split('  ')
-                        a2.shift()
-                        arr_table.push(a2)
-                        // arr1 = a2
-                        // console.log(arr1)
-                    }
-                    // console.log(arr_table)
-                    for(var i = 0; i < arr_table.length; i++){
-                        _html += '<tr><td>'+arr_table[i][0]+'</td><td>'+arr_table[i][2]+'</td></tr>';
-
-                    }
-                    // console.log(arr_table[0]);
-                }
-                  $('.list').html(_html);
-                  _html = '';
-              }
-          })
-    }
-
-
-
-layui.use(['util'],function(){
-  var layer = layui.layer,
-      util = layui.util,
-      element = layui.element,
-      laydate = layui.laydate;
-  //日期
-  laydate.render({
-    elem: '#test1',
-      value: new Date('2019-12-06'),
-      isInitValue: true,
-      done:function (value) {
-        // console.log(value)
-        datainit(value)
-      }
-  });
-
-  laydate.render({
-    elem: '#test2',
-    value: new Date(),
-    isInitValue: true,
-    done:function (value) {
-      let time= value.split('-').join('');
-      let _path = location.href.split('/')[4];
-      // console.log(time)
-      $.ajax({
-          type:'post',
-          data:{"search":time,"_path":_path},
-          url:'http://127.0.0.1:5000/search',
-          success:function (data) {
-            // console.log(data.search('Empty'))
-            if(data.search('Empty') != -1){
-                _html = '<tr><td>数据为空</td><td>数据为空</td></tr>';
-            }else{
-                var a1 = data.split('\n')
-                var a2;
-                // console.log(a1)
-                a1.shift()
-                // console.log(a1)
-                for (const key in a1) {
-                    // console.log(a1[key])
-                    a2 = a1[key].split('  ')
-                    a2.shift()
-                    arr_table.push(a2)
-                    // arr1 = a2
-                    // console.log(arr1)
-                }
-                // console.log(arr_table)
-                for(var i = 0; i < arr_table.length; i++){
-                    _html += '<tr><td>'+arr_table[i][0]+'</td><td>'+arr_table[i][2]+'</td></tr>';
-
-                }
-                // console.log(arr_table[0]);
-            }
-              $('.list1').html(_html);
-              _html = '';
-          }
-        })
-      }
-  });
-
-    //返回顶部
-    util.fixbar({
-      bar1: false
-      ,bar2: false
-      ,css: {right: 10, bottom: 30}
-      ,bgcolor: '#009688'
-    });
-
-
-});
+$('.mask').click(function(){
+  $('.pass_login,.qr_login').hide();
+  $(this).hide();
+})
+function showmodel(){
+  $('.qr_login,.mask').show();
+}
+function goreg(){
+  $('.pass_login').show();
+}
+function gologin(){
+  $('.pass_login').hide();
+  $('.qr_login').show();
+}
 </script>
 </html>

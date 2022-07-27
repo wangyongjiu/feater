@@ -3,7 +3,7 @@ import json
 import csv
 import pandas as pd
 from flask import *
-from Factor_utils import Factors, Factor_board
+from Factor_utils import Factors, Factor_board, get_path_list, filter_factors, generate_query_statement, get_json
 
 app = Flask(__name__,static_folder="static")
 
@@ -11,6 +11,17 @@ pd.set_option('display.width', 10000) # 设置字符显示宽度
 pd.set_option('display.max_rows', None) # 设置显示最大行
 pd.set_option('display.max_columns', None) # 设置显示最大列，None为显示所有列
 
+factor_description = r"C:\Users\Administrator\Desktop\feather\factor_description.json"
+factor_path = r"C:\Users\Administrator\Desktop\feather\data"
+
+
+# 数组去重
+def array_repeat(source):
+    dest = []
+    for e in source:
+        if e not in dest:
+            dest.append(e)
+    return dest
 
 
 # 路由
@@ -25,50 +36,132 @@ def details(details):
     return render_template('details.html',details=details)
 
 
-
 # 数据接口
-# 首页---因子看板----数据接口
-@app.route('/home',methods=['GET','POST'])
-def home():
-    fr = open('./utils/test.json', 'r', encoding='utf-8')
-    return str(fr.read())
+# 首页---表单选框内容---数据接口
+@app.route('/initform', methods=['GET', 'POST'])
+def initform():
+    data = []
+    obj = {}
+    list_key = ['algo','meta','freq','vol','end']
+    with open('./factor_description.json', 'r', encoding='utf-8') as f:
+        dataset = pd.read_json(f)
+        for key in dataset.values:
+            data.append(array_repeat(key))
+        del data[0]
+        for i in range(len(list_key)):
+            obj.update({list_key[i]:data[i]})
+        # print(obj)
+    return jsonify(obj)
+
 
 # 首页---多条件查询表单-----接口
 @app.route('/formsub',methods=['GET','POST'])
 def formsub():
-    # combination = request.form.get('combination')
-    # pool = request.form.get('pool')
-    # search_all_data = return_all('select * from test where date="' + combination + '" or stockcode <'+ pool)
-    # 统计
-    pool_all = 0
-    # for i in search_all_data:
-    #     pool_all += int(float(i[1]))
-        # print(i[2])
-    return str(pool_all)
+    algo = request.form.get('algo')
+    freq = request.form.get('freq')
+    vol = request.form.get('vol')
+    meta = request.form.get('meta')
+    end = request.form.get('end')
+    # print(algo,freq,vol,meta,end)
+    dict = {}
+    if algo != 'no':
+        dict.update({'algo':algo})
+    if freq != 'no':
+        dict.update({'freq': freq})
+    if vol != 'no':
+        dict.update({'vol': vol})
+    if meta != 'no':
+        dict.update({'meta': meta})
+    if end != 'no':
+        dict.update({'end': end})
+
+
+    # 根据dict字典中的检索条件Query，返回值是查询到因子文件的绝对路径
+    if algo == 'no' and freq == 'no' and vol == 'no' and meta == 'no' and end == 'no':
+        dict = None
+
+    path_list = get_path_list(factor_list=filter_factors(query_statement=generate_query_statement(dict=dict),
+                                                         factor_description=factor_description),
+                              factor_path=factor_path)
+    # 利用因子绝对路径的list生成因子看板数据
+    result = get_json(Factor_board(path_list=path_list).factor_board)
+    return jsonify(result)
+
+
+
+# 首页---分页获取总条数---数据接口
+@app.route('/tol_page', methods=['GET', 'POST'])
+def tol_page():
+    path_list = get_path_list(factor_list=filter_factors(query_statement=generate_query_statement(),
+                                                         factor_description=factor_description),
+                              factor_path=factor_path)
+    # 利用因子绝对路径的list生成因子看板数据
+    result = get_json(Factor_board(path_list=path_list).factor_board)
+    length = len(result)
+    return str(length)
+
+
+# 首页---分页----数据接口
+@app.route('/page', methods=['GET', 'POST'])
+def page():
+    page = request.args.get('page')
+
+    path_list = get_path_list(factor_list=filter_factors(query_statement=generate_query_statement(),
+                                                         factor_description=factor_description),
+                              factor_path=factor_path)
+    # 利用因子绝对路径的list生成因子看板数据
+    result = get_json(Factor_board(path_list=path_list).factor_board)
+
+    arr = []
+    res = {}
+    for key in result:
+        if key == 'stockcode':
+            continue
+        arr.append(key)
+    arr = arr[(int(page)-1)*15:int(page)*15]
+    for key in arr:
+        data = {key: result[key]}
+        res.update(data)
+    # print(res)
+    return json.dumps(res)
+
+
 
 # details页---描述信息----数据接口
 @app.route('/des',methods=['GET','POST'])
 def des():
-    des_data = json.load(open('./static/data/factor_description.json', 'r', encoding='utf-8'))
-    # print(des_data)
-    return json.dumps(des_data)
+    title = request.args.get('title')
+    des_data = json.load(open('./factor_description.json', 'r', encoding='utf-8'))
+    return jsonify(des_data[title])
 
 # details页---三维立体echarts图形展示----数据接口
 @app.route('/echarts',methods=['GET','POST'])
 def echarts():
     arr = json.load(open(os.path.join('static/data/','echarts.json'),'r',encoding="utf-8"))
-    # print(json.dumps(arr))
-    return json.dumps(arr)
+    return jsonify(arr)
 
 # details页----按时间查询股票因子-----接口
 @app.route('/search',methods=['GET', 'POST'])
 def search():
     search = request.form.get('search')
-    detail_path = './utils/' + request.form.get('_path') + '.f'
+    detail_path = './data/' + request.form.get('_path') + '.f'
     # print(search)
-    table_data = Factors(detail_path).quary_F_bydate(date=int(search))
-    # print(table_data)
-    return str(table_data)
+    table_data = Factors(detail_path).quary_F_bydate(date=int(search)).head(10)
+
+    arr = []
+    if len(table_data.index):
+        for rows in table_data.values:
+            data = {'stockcode': rows[0], 'alpha': rows[2]}
+            arr.append(data)
+    else:
+        data = {'stockcode':'数据为空','alpha':'数据为空'}
+        arr.append(data)
+    return jsonify(arr)
+
+
+
+
+
 
 
 
