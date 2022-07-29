@@ -308,12 +308,12 @@
   function nameinit(el,el1,inp){
     let _path = location.href.split('/')[4];
     $(el).click(function(){
-      
       var s = $.trim($(inp).val())
       if(s == ''){
         layer.msg('请输入要查询的股票名')
         return false
       }
+      layer.load(1)
       $.ajax({
         type:'get',
         url:'/condition',
@@ -328,6 +328,7 @@
           }
           $(el1).html(nameHtml)
           nameHtml = '';
+          layer.closeAll('loading');
         },
         error:function(err){
           layer.msg('出错啦')

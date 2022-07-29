@@ -125,6 +125,10 @@
     </div>
     <script>
         function searchSub(){
+            layer.load(1);
+            setTimeout(function(){
+                layer.closeAll('loading');
+            }, 1000);
             let search_inp = $.trim($('.search_inp').val())
             console.log(search_inp)
             if(search_inp == ''){

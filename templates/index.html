@@ -305,7 +305,67 @@
       }
     })
   })
+</script>
+<script>
+  // 顶部条件查询
+  function FormSub(){
+    var algo = $('select[name="algo"]').val();
+    var freq = $('select[name="freq"]').val();
+    var vol = $('select[name="vol"]').val();
+    var meta = $('select[name="meta"]').val();
+    var end = $('select[name="end"]').val();
 
+    // console.log(algo,freq,vol,meta,end);
+
+    var _html = '';
+    var _table_title = '';
+    var _htmlecharts = '';
+    layer.load(1)
+    layui.use(['form'], function(){
+      var form = layui.form;
+      $.ajax({
+        type:'post',
+        url:'/formsub',
+        data:{"algo":algo,"freq":freq,"vol":vol,"meta":meta,"end":end},
+        success:function(data){
+          console.log(data)
+          var len_arr = Object.keys(data[Object.keys(data)[0]]);
+          for(var i = 0; i < len_arr.length; i++){
+            _table_title += '<th>'+len_arr[i]+'</th>'
+          }
+          _table_title = '<th>因子看板</th>'+_table_title+'<th style="width: 5%;"><i class="layui-icon" onclick="changelist()" style="cursor: pointer;">换一换&#xe669;</i></th>'
+          for (const key in data) {
+            var _tdhtml = '';
+            for (const i in data[key]) {
+              _tdhtml += '<td>'+data[key][i]+'</td>'
+            }
+            _html +=  '<tr>'+
+                      '<td><a href="/details/'+key+'">'+key+'</a></td>'+
+                        _tdhtml+
+                        '<td><a href="/details/'+key+'">更多</a></td>'+
+                      '</tr>'
+          }
+          $('.Factor thead').html(_table_title);
+          $('.Factor tbody').html(_html);
+          _html = '';
+          _table_title = '';
+          for (const key in data) {
+            _htmlecharts += '<option value="'+key+'">'+key+'</option>';
+          }
+          // console.log(_htmlecharts)
+          $('#y_axis').html(_htmlecharts);
+          $('#x_axis').html(_htmlecharts);
+          _htmlecharts = '';
+          form.render();
+          layer.closeAll('loading');
+        },
+        error:function(err){
+          layer.msg('出错啦');
+        }
+      })
+    })
+
+  }
 </script>
 <script>
   var chartDom = document.getElementById('graphic_show');
@@ -340,6 +400,7 @@
     var y_axis;
     x_axis = $("select[name='x_axis']").val();
     y_axis = $("select[name='y_axis']").val();
+    layer.load(1)
     $.ajax({
       type:'get',
       url:'/coefficient',
@@ -350,6 +411,7 @@
       success:function(data){
         // console.log(data)
         $('.coe_int').val(data);
+        layer.closeAll('loading');
       },
       error:function(err){
         console.log('wrr'+err)
@@ -359,7 +421,7 @@
   }
 
 
-
+  // 坐标查询
   $('.axis_btn').click(function(){
     var x_axis;
     var y_axis;
@@ -370,6 +432,7 @@
     // console.log(x_axis,y_axis);
     x_name = x_axis.split('-')[0]
     y_name = y_axis.split('-')[0]
+    layer.load(1);
     $.ajax({
       type:'get',
       url:'/indexEcharts',
@@ -387,6 +450,7 @@
         option.series = [{ type: 'bar' }, { type: 'bar' }];
         // console.log(option)
         myChart.setOption(option);
+        layer.closeAll('loading');
       },
       error:function(err){
         console.log('wrr'+err)
@@ -470,6 +534,8 @@
   function changelist(){
     var _table_title = '';
     var _html = '';
+
+    layer.load(1);
     $.ajax({
       type:'get',
       url:'/changeList',
@@ -496,6 +562,7 @@
         $('.Factor tbody').html(_html);
         _html = '';
         _table_title = '';
+        layer.closeAll('loading');
       },
       error:function(err){
         console.log('wrr'+err)
@@ -504,51 +571,7 @@
     })
   }
   </script>
-<script>
-  function FormSub(){
-    var algo = $('select[name="algo"]').val();
-    var freq = $('select[name="freq"]').val();
-    var vol = $('select[name="vol"]').val();
-    var meta = $('select[name="meta"]').val();
-    var end = $('select[name="end"]').val();
 
-    // console.log(algo,freq,vol,meta,end);
-
-    var _html = '';
-    var _table_title = '';
-    $.ajax({
-        type:'post',
-        url:'/formsub',
-        data:{"algo":algo,"freq":freq,"vol":vol,"meta":meta,"end":end},
-        success:function(data){
-          // console.log(data)
-          var len_arr = Object.keys(data[Object.keys(data)[0]]);
-          for(var i = 0; i < len_arr.length; i++){
-            _table_title += '<th>'+len_arr[i]+'</th>'
-          }
-          _table_title = '<th>因子看板</th>'+_table_title+'<th style="width: 5%;"><i class="layui-icon" onclick="changelist()" style="cursor: pointer;">换一换&#xe669;</i></th>'
-          for (const key in data) {
-            var _tdhtml = '';
-            for (const i in data[key]) {
-              _tdhtml += '<td>'+data[key][i]+'</td>'
-            }
-            _html +=  '<tr>'+
-                      '<td><a href="/details/'+key+'">'+key+'</a></td>'+
-                        _tdhtml+
-                        '<td><a href="/details/'+key+'">更多</a></td>'+
-                      '</tr>'
-          }
-          $('.Factor thead').html(_table_title);
-          $('.Factor tbody').html(_html);
-          _html = '';
-          _table_title = '';
-        },
-        error:function(err){
-          layer.msg('出错啦');
-        }
-    })
-  }
-</script>
 <script>
   $(function(){
     var modeldata;
