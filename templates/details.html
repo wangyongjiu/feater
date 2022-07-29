@@ -25,24 +25,26 @@
 <!-- 头部 -->
 <div class="head">
   <span class="logo">AI因子看板</span>
-  <ul class="layui-nav one">
+  <ul class="layui-nav first">
     <li class="layui-nav-item" onclick="showmodel()">专家信息</li>
     <li class="layui-nav-item" onclick="showmodel()">园区信息</li>
-    <li class="layui-nav-item" onclick="showmodel()">自助评级</li>
+    <li class="layui-nav-item"><a href="/ccrs">自助评级</a></li>
     <li class="layui-nav-item"><a href="http://ipoipo.cn/">行业研究</a></li>
     <li class="layui-nav-item"><a href="https://bigquant.com/wiki/home">量化研究</a></li>
+    <li class="layui-nav-item"><a target="_blank" href="http://www.chaguwang.cn/">查股网</a></li>
     <li class="layui-nav-item"><a href="/">首页</a></li>
     <li><a href="/search" class="layui-icon" style="color: #ffffff;">&#xe615;</a></li>
   </ul>
-  <ul class="two">
+  <ul class="sec">
     <li class="layui-nav-item two_li">
       <i class="layui-icon" style="padding: 0 0 0 20px;">&#xe671;</i>
       <dl class="layui-nav-child">
         <dd><a href="/search"><i class="layui-icon" class="">&#xe615;</i></a></dd>
         <dd><a href="/">首页</a></dd>
+        <dd><a target="_blank" href="http://www.chaguwang.cn/">查股网</a></dd>
         <dd><a href="https://bigquant.com/wiki/home">量化研究</a></dd>
         <dd><a href="http://ipoipo.cn/">行业研究</a></dd>
-        <dd><a href="javascript:;" onclick="showmodel()">自助评级</a></dd>
+        <dd><a href="/ccrs">自助评级</a></dd>
         <dd><a href="javascript:;" onclick="showmodel()">园区信息</a></dd>
         <dd><a href="javascript:;" onclick="showmodel()">专家信息</a></dd>
       </dl>
@@ -104,9 +106,9 @@
       $('.describe .info_item:eq(3) span:eq(1)').html(data['vol']);
       $('.describe .info_item:eq(4) span:eq(1)').html(data['end']);
     },
-      error:function (err) {
-        layer.msg('出错啦')
-      }
+    error:function (err) {
+      layer.msg('出错啦')
+    }
   })
 </script>
 
@@ -196,18 +198,13 @@
               <th>alpha</th>
             </tr>
           </thead>
-          <tbody class="list1">
-              <tr>
-                  <td></td>
-                  <td></td>
-              </tr>
-          </tbody>
+          <tbody class="list1"></tbody>
         </table>
   </div>
   <div class="table_l">
           <div class="title">
               <span class="l">
-                  因子值最大的10只股票
+                  因子值最小的10只股票
               </span>
               <span class="r">
                   <i id="test2"></i>更新
@@ -226,12 +223,60 @@
               <th>alpha</th>
             </tr>
           </thead>
-          <tbody class="list2">
-              <tr>
-                  <td></td>
-                  <td></td>
-              </tr>
-          </tbody>
+          <tbody class="list2"></tbody>
+        </table>
+  </div>
+</div>
+<div class="layui-container" style="width: 100%;">
+  <div class="table_l">
+      <div class="title">
+          <span class="l">
+            因子值最大的10只股票
+          </span>
+          <span class="r">
+            <!-- <i id="test1" style="opacity: 0;">更新</i> -->
+            <input type="text" placeholder="输入" class="layui-input inp3" style="width: 120px;display: inline-block;"><button type="button" class="layui-btn layui-btn-sm btn3">提交</button>
+          </span>
+          <div style="clear: both;"></div>
+      </div>
+       <table class="layui-table">
+          <colgroup>
+            <col width="150">
+            <col width="200">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th>stockcode</th>
+              <th>alpha</th>
+            </tr>
+          </thead>
+          <tbody class="list3"></tbody>
+        </table>
+  </div>
+  <div class="table_l">
+          <div class="title">
+              <span class="l">
+                  因子值最小的10只股票
+              </span>
+              <span class="r">
+                <input type="text" placeholder="输入" class="layui-input inp4" style="width: 120px;display: inline-block;"><button type="button" class="layui-btn layui-btn-sm btn4">提交</button>
+              </span>
+              <div style="clear: both;"></div>
+          </div>
+        <table class="layui-table">
+          <colgroup>
+            <col width="150">
+            <col width="200">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th>stockcode</th>
+              <th>alpha</th>
+            </tr>
+          </thead>
+          <tbody class="list4"></tbody>
         </table>
   </div>
 </div>
@@ -259,9 +304,44 @@
     })
   }
 
+  var nameHtml = '';
+  function nameinit(el,el1,inp){
+    let _path = location.href.split('/')[4];
+    $(el).click(function(){
+      
+      var s = $.trim($(inp).val())
+      if(s == ''){
+        layer.msg('请输入要查询的股票名')
+        return false
+      }
+      $.ajax({
+        type:'get',
+        url:'/condition',
+        data:{
+          "_path":_path,
+          "s":s
+        },
+        success:function(data){
+          // console.log(data)
+          for(var i = 0; i < data.length; i++){
+            nameHtml += '<tr><td>'+data[i]['stockcode']+'</td><td>'+data[i]['alpha']+'</td></tr>';
+          }
+          $(el1).html(nameHtml)
+          nameHtml = '';
+        },
+        error:function(err){
+          layer.msg('出错啦')
+        }
+      })
+    })
+  }
 
   datainit('2019-12-06','.list1');
   datainit('2019-12-19','.list2');
+
+  nameinit('.btn3','.list3','.inp3');
+  nameinit('.btn4','.list4','.inp4');
+
 
   layui.use(['util'],function(){
     var layer = layui.layer,
@@ -274,7 +354,7 @@
           value: new Date('2019-12-06'),
           isInitValue: true,
           done:function (value) {
-          // console.log(value)
+          console.log(value)
               datainit(value,'.list1')
           }
       });
@@ -293,7 +373,7 @@
           bar1: false
           ,bar2: false
           ,css: {right: 10, bottom: 30}
-          ,bgcolor: '#009688'
+          ,bgcolor: 'rgb(231, 76, 60)'
       });
   });
 </script>
@@ -343,6 +423,10 @@
           ]
         };
         myChart.setOption(option);
+      },
+      error:function(err){
+        console.log('wrr'+err)
+        layer.msg('出错啦');
       }
     })
 
@@ -735,15 +819,13 @@ Highcharts.chart('list_li2', {
         <dd><a href="https://www.csc108.com/comOverView/introduce.jspx" target="_blank" rel="noopener noreferrer">中信建投证券</a></dd>
       </dl>
       <dl>
-        <dt>关注我们</dt>
         <img src="../static/images/qrcode.png" alt="">
-        <dd style="text-align: center">微信公众号</dd>
       </dl>
     </div>
   </div>
   <div style="clear: both;"></div>
-  <p style="color: #000000;">@2022 津icp备170xxxxxxx号-6</p>
 </div>
+<p style="color: #000000;text-align: center;">@2022 津icp备15002249号-6</p>
 <style>
   input,select{
     border: none;

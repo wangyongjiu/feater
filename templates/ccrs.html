@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <title>自助评级</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="聚宽让量化交易的成长之路更为平坦，聚宽让做量化交易的成本极大降低">
+    <meta name="keywords" content="因子看板、研究策略、本地数据、量化聚宽">
+    <meta name="robots" content="all"/>
+    <link rel="shortcut icon" href="../static/favicon.ico"  type="image/x-icon"/>
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../static/vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../static/dist/css/bootstrapValidator.css"/>
+    <link rel="stylesheet" href="../static/css/public.css">
+    <link rel="stylesheet" href="../static/css/ccrs.css">
+    <script src="../static/jquery-1.11.1.min.js"></script>
+    <script src="../static/layui/layui.js"></script>
+    <script type="text/javascript" src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../static/dist/js/bootstrapValidator.js"></script>\
+    <script type="text/javascript" src="../static/vendor/step/step.js"></script>
+</head>
+<body>
+<!-- 头部 -->
+  <div class="head">
+    <span class="logo">自助评级</span>
+    <ul class="layui-nav first">
+      <li class="layui-nav-item" onclick="showmodel()">专家信息</li>
+      <li class="layui-nav-item" onclick="showmodel()">园区信息</li>
+      <li class="layui-nav-item"><a href="/ccrs">自助评级</a></li>
+      <li class="layui-nav-item"><a href="http://ipoipo.cn/">行业研究</a></li>
+      <li class="layui-nav-item"><a href="https://bigquant.com/wiki/home">量化研究</a></li>
+      <li class="layui-nav-item"><a target="_blank" href="http://www.chaguwang.cn/">查股网</a></li>
+      <li class="layui-nav-item"><a href="/">首页</a></li>
+      <li><a href="/search" class="layui-icon" style="color: #ffffff;">&#xe615;</a></li>
+    </ul>
+    <ul class="sec">
+      <li class="layui-nav-item two_li">
+        <i class="layui-icon" style="padding: 0 0 0 20px;">&#xe671;</i>
+        <dl class="layui-nav-child">
+          <dd><a href="/search"><i class="layui-icon" class="">&#xe615;</i></a></dd>
+          <dd><a href="/">首页</a></dd>
+          <dd><a target="_blank" href="http://www.chaguwang.cn/">查股网</a></dd>
+          <dd><a href="https://bigquant.com/wiki/home">量化研究</a></dd>
+          <dd><a href="http://ipoipo.cn/">行业研究</a></dd>
+          <dd><a href="/ccrs">自助评级</a></dd>
+          <dd><a href="javascript:;" onclick="showmodel()">园区信息</a></dd>
+          <dd><a href="javascript:;" onclick="showmodel()">专家信息</a></dd>
+        </dl>
+      </li>
+    </ul>
+    <div style="clear: both;"></div>
+  </div>
+  <div style="height: 70px;"></div>
+
+
+<!-- grade -->
+<div class="grade">
+    <!-- 步骤条 -->
+    <div id="test">
+        <div id="luStep"></div>
+    </div>
+    <div style="clear: both;"></div>
+    <!-- 表单 -->
+    <form id="defaultForm" class="form-horizontal" style="position: relative;">
+        <!-- 1盈利能力 -->
+        <div class="one one1">
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n1">净资产收益率(平均)(%)</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n1" id="n1" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    归属母公司股东净利润/[(期初归属母公司股东的权益+期末归属母公司股东的权益)/2]*100%
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n2">销售净利率(%)</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n2" id="n2" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    净利润/营业收入*100%
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n3">销售毛利率(%)</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n3" id="n3" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    毛利/营业收入*100%=(营业收入-营业成本)/营业收入*100%
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n4">净利润(元)</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n4" id="n4" placeholder="请输入">
+                </div>
+                <div class="col-lg-6"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n5">每股收益</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n5" id="n5" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    归属母公司股东的净利润TTM/最新总股本
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n6">总股本</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n6" id="n6" placeholder="请输入">
+                </div>
+                <div class="col-lg-6"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n7">流通股本</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n7" id="n7" placeholder="请输入">
+                </div>
+                <div class="col-lg-6"></div>
+            </div>
+        </div>
+
+        <!-- 2运营能力 -->
+        <div class="one">
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n8">应收账款周转率(次)</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n8" id="n8" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    营业收入/[(期初应收票据及应收账款净额+期末应收票据及应收账款净额)/2]
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n9">应收账款周转天数(天)</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n9" id="n9" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    季报天数/应收账款周转率(一季报：90天，中报：180天，三季报：270天，年报：360天)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n10">存货周转率(次)</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n10" id="n10" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    营业成本/[(期初存货净额+期末存货净额)/2]
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n11">存货周转天数(天) </label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n11" id="n11" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    季报天数/存货周转率(一季报：90天，中报：180天，三季报：270天，年报：360天)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n12">流动资产周转率(次)</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n12" id="n12" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    营业总收入/[(期初流动资产+期末流动资产)/2]
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n13">总资产周转率</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n13" id="n13" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    营业总收入/[(期初资产总额+期末资产总额)/2]
+                </div>
+            </div>
+        </div>
+
+        <!--3 成长能力 -->
+        <div class="one">
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n14">净资产同比增长率</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n14" id="n14" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    (本期净资产-上年同期净资产)/上年同期净资产的绝对值*100%
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n15">总资产同比增长率</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n15" id="n15" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    (本期总资产-上年同期总资产)/上年同期总资产的绝对值*100%
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n16">净利润同比增长率</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n16" id="n16" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    (本期净利润-上年同期净利润)/上年同期净利润的绝对值*100%
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n17">基本每股收益同比增长率</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n17" id="n17" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    (本期基本每股收益-上年同期基本每股收益)/上年同期基本每股收益的绝对值*100%
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n18">归属母公司股东净利润同比增长率</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n18" id="n18" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    (本期归属母公司股东净利润-上年同期归属母公司股东净利润)/上年同期归属母公司股东净利润的绝对值*100%
+                </div>
+            </div>
+        </div>
+
+        <!--4 偿债能力 -->
+        <div class="one">
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n19">流动比率</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n19" id="n19" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    流动资产/流动负债
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n20">速动比率</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n20" id="n20" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    (流动资产-存货净额)/流动负债
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n21">现金比率</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n21" id="n21" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    (货币资金+交易性金融资产)/流动负债
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n22">总负债同比增长率</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n22" id="n22" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    (本期总负债-上年同期总负债)/上年同期中负债的绝对值*100%
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n23">资产负债率</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n23" id="n23" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    负债总额/资产总额
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n24">权益乘数</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n24" id="n24" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    资产总额/股东权益总额=1/(1-资产负债率)
+                </div>
+            </div>
+        </div>
+
+        <!--5 现金流量 -->
+        <div class="one">
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n25">流动资产除以总资产</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n25" id="n25" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n26">非流动资产除以总资产</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n26" id="n26" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n27">有形资产除以总资产</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n27" id="n27" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n28">已获利息倍数</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n28" id="n28" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    息税前利润/利息费用
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n29">经营活动产生的现金流量净额除以营业收入</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n29" id="n29" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n30">经营性现金净流量除以净利润</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n30" id="n30" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n31">经营性现金净流量除以营业总收入</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n31" id="n31" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- 6杜邦指数 -->
+        <div class="one">
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n32">净资产收益率</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n32" id="n32" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    归属母公司股东净利润/[(期初归属母公司股东的权益+期末归属母公司股东的权益)/2]*100%
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n33">权益乘数，反映企业财务杠杆效应强弱和财务风险</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n33" id="n33" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    平均总资产/平均归属于母公司的股东权益
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n34">总资产周转率，反映企业资产管理效率的指标</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n34" id="n34" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    营业总收入/[(期初资产总额+期末资产总额)/2]
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n35">归属母公司股东的净利润/净利润</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n35" id="n35" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    反映母公司控股子公司百分比。如果企业追加投资，扩大持股比例，则本指标会增加。
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n36">净利润/营业总收入</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n36" id="n36" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    反映企业销售获利率
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n37">净利润/利润总额</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n37" id="n37" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    反映企业税负水平，该比值高则税负较低。净利润/利润总额=1-所得税/利润总额
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n38">利润总额/息税前利润</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n38" id="n38" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    反映企业利息负担，该比值高则税负较低。利润总额/息税前利润=1-利息费用/息税前利润
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="n39">息税前利润/营业总收入</label>
+                <div class="col-lg-2">
+                    <input type="number" step="0.1" class="form-control" name="n39" id="n39" placeholder="请输入">
+                </div>
+                <div class="col-lg-6">
+                    反映企业经营利润率，是企业经营获得的可供全体投资人（股东和债权人）分配的盈利占企业全部营收收入的百分比
+                </div>
+            </div>
+        </div>
+
+        <!-- 分页 -->
+        <div class="form-group" style="position: absolute;top: 520px;width: 100%;text-align: center;">
+            <div class="col-lg-9 col-lg-offset-4">
+                <div style="margin-top: 34px; margin-left: 100px;">
+                    <div class="btnext lastbtn disabledBG" onclick="btup()">上一步</div>
+                    <div class="btnext nextbtn" onclick="next()">下一步</div>
+                    <div class="btnext signup_btn" data-loading-text='loading...'>提&nbsp;&nbsp;&nbsp;交</div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- <div class="bgi">
+    <img src="../static/images/bgc1.jpg" alt="" width="100%" height="100%">
+</div> -->
+
+<!-- 弹框 -->
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"">
+    <div class="modal-dialog modal-lg" role="document" style="margin-top: 300px;">
+        <div class="modal-content" style="padding: 20px;">
+            <h4>评级</h4>
+            <div class="row">
+                <span class="col-sm-4">结果</span>
+                <span class="col-sm-4 reslut" style="font-weight: 700;"></span>
+                <span class="col-sm-4">级</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 底部 -->
+<div class="footer">
+    <div class="layui-container">
+        <div>
+        <dl class="dl">
+            <dt>关于</dt>
+            <dd><a href="http://www.tafirt.org/about.html" target="_blank" rel="noopener noreferrer">关于我们</a></dd>
+            <dd><a href="http://www.tafirt.org/coalize.html" target="_blank" rel="noopener noreferrer">加入我们</a></dd>
+            <dd><a href="http://www.tafirt.org/contact.html" target="_blank" rel="noopener noreferrer">联系我们</a></dd>
+        </dl>
+        <dl class="dl">
+            <dt>帮助</dt>
+            <dd onclick="showmodel()">常见问题</dd>
+            <dd onclick="showmodel()">API文档</dd>
+        </dl>
+        <dl class="dl">
+            <dt>友情链接</dt>
+            <dd><a href="http://www.ia.cas.cn/" target="_blank" rel="noopener noreferrer">中国科学院自动化研究所</a></dd>
+            <dd><a href="http://www.ia.cas.cn/jgsz/kyxt/ZNGZ/" target="_blank" rel="noopener noreferrer">智能感知与计算研究中心</a></dd>
+            <dd><a href="https://www.csc108.com/comOverView/introduce.jspx" target="_blank" rel="noopener noreferrer">中信建投证券</a></dd>
+        </dl>
+        <dl>
+            <img src="../static/images/qrcode.png" alt="">
+        </dl>
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+</body>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        //评级等级对应对象
+        var grade_obj = {"AAA":1,"AA":2,"BBB":3,"BB":4,"B":5,"CCC":6,"CC":7,"C":8,"D":9};
+        var grade_array = ["AAA","AA","BBB","BB","B","CCC","CC","C","D"];
+        var grade_arr = [];
+        var datas;
+        var result;
+        //校验提示对象
+        var fieldsdata = {};
+        for(var i = 1; i <= 39;i++){
+            fieldsdata['n'+i] = {validators:{notEmpty:{message:'不能为空！'}}}
+        }
+        //验证
+        $('#defaultForm').bootstrapValidator({
+            excluded:[":disabled"],//disabled状态下也要校验
+            message: '不能为空！',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: fieldsdata
+        });
+        // $('.modal').show();
+        //表单提交
+        $('.signup_btn').click(function(event){
+            var inputValue = [];
+            for(var i = 1; i <= 39;i++){
+                inputValue.push(Number($("#n"+i).val()))
+            }
+            // console.log(event.target);
+            var $btn = $(event.target);
+            var bv = $('#defaultForm').data('bootstrapValidator');
+            bv.validate();
+            // console.log(bv.isValid());
+            if(bv.isValid()){
+                $btn.button('loading');
+                $.ajax({
+                    type:"post",
+                    url:"/grade",
+                    data:JSON.stringify({"data":inputValue}),
+                    // data:JSON.stringify({"data":[5.27138270e-01, 8.25752230e+00, 9.95533666e-01, 2.26933173e+09,
+                    //                             1.01670778e+00, 7.87983283e+09, 6.64906142e+09, 1.30192999e+02,
+                    //                             1.38856619e+03, 1.78234935e+03, 5.24114252e+03, 5.14663385e-01,
+                    //                             2.39990120e-01, 1.73779538e+00, 2.79022304e-01, 6.83370576e+01,
+                    //                             6.80914889e+00, 7.50007005e+00, 1.54219387e+00, 1.35281783e+00,
+                    //                             6.63452952e-01, 5.58468562e-01, 2.47359585e+00, 3.68025702e+00,
+                    //                             2.74342540e+00, 3.71265192e-01, 6.53042120e-01, 2.58621214e+02,
+                    //                             5.98361612e+00, 7.29341857e+01, 3.72839459e+00, 5.27138270e-01,
+                    //                             1.50166855e+01, 2.39990120e-01, 4.33075673e+00, 8.60610288e+00,
+                    //                             1.74420606e+01, 1.48476654e+01, 1.59381980e+00]}),
+                    success:function(res){
+                        // console.log(JSON.parse(res));
+                        $btn.button('reset');
+                        datas = JSON.parse(res);
+                        grade_arr = [grade_obj[datas['ASSL4CCR']],grade_obj[datas['CCRCNN']],grade_obj[datas['CCRGNN']]];
+                        result = findMost(grade_arr);
+                        if(result == undefined){
+                            result = grade_arr.sort((x,y) => x - y)[0];
+                        }
+                        $('.reslut').text(grade_array[result-1]);
+                        $('.modal').modal('show');
+                    },
+                    error:function(err){
+                        $('.reslut').text('出错啦');
+                        $('.modal').modal('show');
+                    }
+                });
+            }else{
+                layer.msg('请检查某步骤未填信息');
+            }
+        });
+    });
+    //取众数函数方法
+    function findMost(arr){
+        var maxEle;
+        var maxNum = 1;
+        var obj = arr.reduce(function(p,k){
+            p[k] ? p[k]++ : p[k] = 1;
+            if(p[k] > maxNum){
+                maxEle = k;
+                maxNum++;
+            }
+            return p;
+        },{});
+        return maxEle;
+    }
+    </script>
+<script>
+    // 步骤条插件
+    data = {
+        data: ['盈利能力', '运营能力', '成长能力', '偿债能力','现金流量','杜邦指数'],
+        index: 0 //0是第一步
+    };
+    var dom = $('#luStep');
+    dom.stepInit(data);
+    var key=0;
+    function next(){ //点击下一步
+        if(key>=5) return;
+        key++;
+        // console.log(key);
+        if(key == 5){
+            $(".lastbtn").removeClass('disabledBG');
+            $(".nextbtn").addClass('disabledBG');
+        }else{
+            $(".lastbtn,.nextbtn").removeClass('disabledBG');
+        }
+        $('.one').each(function(index,item){
+            $(this).hide();
+        });
+        $('.one:eq('+key+')').show();
+        dom.toStep(key);
+    }
+    function btup(){
+        if(key<=0) return;
+        key--;
+        // console.log(key);
+        if(key == 0){
+            $(".lastbtn").addClass('disabledBG');
+            $(".nextbtn").removeClass('disabledBG');
+        }else{
+            $(".lastbtn,.nextbtn").removeClass('disabledBG');
+        }
+        $('.one').each(function(index,item){
+            $(this).hide();
+        });
+        $('.one:eq('+key+')').show();
+        dom.toStep(key);
+    }
+    function divWight(){
+       var value =$('input').val();
+       $("#test").css({ width:value+'px'});
+       dom.empty();
+       dom.stepInit(data);
+    }
+</script>
+<script>
+    layui.use(['util'],function(){
+        var util = layui.util;
+        //返回顶部
+        util.fixbar({
+        bar1: false
+        ,bar2: false
+        ,css: {right: 10, bottom: 30}
+        ,bgcolor: 'rgb(100, 189, 46)'
+        });
+    });
+</script>
+</html>

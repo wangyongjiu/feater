@@ -1,20 +1,34 @@
 html,body{
     width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  body{
-    background: #eeeeee;
-  }
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body{
+  background: #eeeeee;
+}
+.layui-btn{
+  background-color: rgb(231, 76, 60);
+}
+.layui-laypage .layui-laypage-curr .layui-laypage-em{
+  background-color: rgb(231, 76, 60);
+}
+.layui-table th {
+  width: 13.5%;
+}
+.layui-nav .layui-nav-item a{
+  padding: 0;
+  color: #ffffff;
+}
+/* 公共头部 */
 .head{
     width: 100%;
     line-height: 60px;
-    background: #009688;
+    background: rgb(231, 76, 60);
     color: #ffffff;
     position: fixed;
     top: 0;
-    z-index: 1;
+    z-index: 10;
 }
 .head span{
     float: left;
@@ -25,125 +39,152 @@ html,body{
     float: right;
     padding-right: 20px;
 }
-.one,.two{
+.first,.sec{
   cursor: pointer;
 }
-.layui-nav .layui-nav-item a{
-  padding: 0;
-  color: #ffffff;
+.goback{
+  position: absolute;
+  right: 40px;
+  top: 24px;
 }
-
+.goback1{
+  padding: 0 10px;
+}
+@media screen and (max-width: 640px){
+  .head .first{
+    display: none;
+  }
+  .goback{
+    display: none;
+  }
+}
+@media screen and (min-width: 640px){
+  .head .sec{
+    display: none;
+  }
+  .goback1{
+    display: none;
+  }
+}
+.describe{
+  background: #ffffff;
+  padding: 24px;
+  border-bottom: 1px solid #cccccc;
+}
+/* 公共底部 */
 .footer{
-    width: 100%;
-    height: 260px;
-    background: #009688;
+  width: 100%;
+  height: 260px;
+  background: rgb(231, 76, 60);
+  color: #ffffff;
+  padding-top: 20px;
+}
+.footer dl{
+  float: left;
+  width: 25%;
+  text-align: center;
+}
+.footer dl dt{
+  font-size: 20px;
+  line-height: 40px;
+}
+.footer dl dd{
+  line-height: 24px;
+}
+.footer p {
+  text-align: center;
+  margin-top: 20px;
+}
+.footer a{
     color: #ffffff;
   }
+@media screen and (max-width: 640px){
   .footer dl{
     float: left;
-    padding: 20px 180px 20px 0;
+    padding: 20px;
   }
-  .footer dl dt{
-    font-size: 20px;
-    line-height: 40px;
+}
+@media screen and (max-width: 1200px){
+  .footer .dl{
+    display: none;
   }
-  .footer dl dd{
-    line-height: 24px;
-  }
-  .footer p {
-    text-align: center;
-    margin-top: 20px;
-  }
-.footer a{
-      color: #ffffff;
-  }
-  @media screen and (max-width: 640px){
-    .footer dl{
-      float: left;
-      padding: 20px;
-    }
-  }
-  @media screen and (max-width: 1200px){
-    .footer .dl{
-      display: none;
-    }
-  }
+}
 
   /* 弹框 */
-  .mask{
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 20;
-    background: #f1f2f7;
-    display: none;
-  }
-  .model_f{
-    width: 358px;
-    position: fixed;
-    left: 50%;
-    right: 0;
-    top: 50%;
-    bottom: 0;
-    z-index: 50;
-    transform: translate(-50%,-50%);
-    padding: 30px;
-    background: #ffffff;
-    border: 1px solid #d9d9d9;
-  }
-  .model_f .group{
-    margin-bottom: 25px;
-  }
-  .model_logo{
-    text-align: center;
-    height: 42px;
-    margin-bottom: 34px;
+.mask{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 20;
+  background: #f1f2f7;
+  display: none;
+}
+.model_f{
+  width: 358px;
+  position: fixed;
+  left: 50%;
+  right: 0;
+  top: 50%;
+  bottom: 0;
+  z-index: 50;
+  transform: translate(-50%,-50%);
+  padding: 30px;
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+}
+.model_f .group{
+  margin-bottom: 25px;
+}
+.model_logo{
+  text-align: center;
+  height: 42px;
+  margin-bottom: 34px;
 
-  }
-  .model_logo img{
-    width: 42px;
-    line-height: 42px;
-  }
-  .model_logo span{
-    font-size: 24px;
-    color: #009688;
-  }
-  .model_title{
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 24px;
-    line-height: 22px;
-    font-weight: 500;
-  }
-  .int{
-    height: 50px;
-    line-height: 50px;
-    border: 1px solid #d9d9d9;
-    font-size: 16px;
-    padding-left: 15px;
-  }
-  #sel{
-    height: 50px;
-    line-height: 50px;
-    width: 86px;
-    border: 1px solid #d9d9d9;
-    font-weight: 700;
-  }
-  .iphone{
-    width: 238px;
-    margin-left: 10px;
-  }
-  .graphical,.qrcode{
-    width: 174px;
-  }
-  .gologin{
-    text-align: center;
-  }
-  .qrcode{
-    margin-right: 20px;
-  }
-  .pass_login,.qr_login{
-    display: none;
-  }
+}
+.model_logo img{
+  width: 42px;
+  line-height: 42px;
+}
+.model_logo span{
+  font-size: 24px;
+  color: rgb(231, 76, 60);
+}
+.model_title{
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 24px;
+  line-height: 22px;
+  font-weight: 500;
+}
+.int{
+  height: 50px;
+  line-height: 50px;
+  border: 1px solid #d9d9d9;
+  font-size: 16px;
+  padding-left: 15px;
+}
+#sel{
+  height: 50px;
+  line-height: 50px;
+  width: 86px;
+  border: 1px solid #d9d9d9;
+  font-weight: 700;
+}
+.iphone{
+  width: 238px;
+  margin-left: 10px;
+}
+.graphical,.qrcode{
+  width: 174px;
+}
+.gologin{
+  text-align: center;
+}
+.qrcode{
+  margin-right: 20px;
+}
+.pass_login,.qr_login{
+  display: none;
+}

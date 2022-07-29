@@ -1,0 +1,161 @@
+a:hover{
+    text-decoration: none;
+}
+input[type="number"]{
+    border: 1px solid #bbb;
+    line-height: 32px;
+    background: none;
+    -moz-appearance:textfield;
+}
+input[type=number]::-webkit-inner-spin-button,  
+input[type=number]::-webkit-outer-spin-button {  
+    -webkit-appearance: none;  
+    margin: 0;  
+}
+.head,.footer{
+    background: rgb(100, 189, 46);
+}
+.bgi{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+.grade{
+    width: 1600px;
+    height: 800px;
+    margin: 10px auto;
+    background: #ffffff;
+    padding: 20px 5px;
+}
+.grade .grade_title{
+    font-size: 20px;
+    text-align: center;
+}
+.grade table{
+    width: 100%;
+}
+.grade table tr{
+    line-height: 42px;
+}
+.grade table tr td input{
+    width: 100px;
+    padding-left: 5px;
+    outline-color: dodgerblue;
+}
+.grade .grade_btn{
+    padding-top: 40px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+.grade .grade_btn button{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: 1px solid transparent;
+    padding: 5px 10px;
+    color: #ffffff;
+    background: dodgerblue;
+    padding: 8px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.grade .grade_res{
+    text-align: left;
+}
+.grade .grade_res_one{
+    padding-left: 100px;
+}
+.grade .grade_res_two{
+    display: inline-block;
+    width: 50px;
+    border: 1px solid #ccc;
+    height: 18px;
+    padding: 5px;
+    vertical-align: middle;
+}
+
+/* 步骤条 */
+ul,li {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+.bar-box {
+    position: relative;
+    top: 11px;
+    left: 10px;
+}
+.bar-content {
+    position: relative;
+    z-index: 5;
+}
+.bar-bg {
+    width: 100%;
+    height: 6px;
+    background: #ddd;
+    position: relative;
+}
+.bar-color {
+    width: 0%;
+    height: 6px;
+    background: #64bd2e;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+.bar-circle-ul {}
+.bar-circle-ul li {
+    float: left;
+}
+.bar-circle-ul li div {
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    line-height: 32px;
+    display: inline-block;
+    border-radius: 50%;
+    background: #ddd;
+    color: #252525;
+    position: relative;
+}
+.bar-circle-ul li div span {
+    position: absolute;
+    top: -40px;
+    color: #7c7c7c;
+    left: -254%;
+    width: 200px;
+    font-size: 25px;
+}
+.btnext{
+    background: #64bd2e;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    float: left;
+    margin-right: 10px;
+    padding: 10px 10px;
+    cursor: pointer;
+}
+#test{
+    width: 1000px;
+    height: 40px;
+    padding: 36px 0px;
+    margin: 0 auto 50px;
+}
+.one{
+    display: none;
+}
+.one1{
+    display: block;
+}
+.bgc{
+    color: #ffffff;
+}
+.disabledBG{
+    cursor: not-allowed;
+    background: #f7f7f7 !important;
+    color: #cbced2;
+}

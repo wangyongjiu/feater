@@ -1,37 +1,13 @@
-@media screen and (max-width: 640px){
-    .head .one{
-      display: none;
-    }
-    .goback{
-      display: none;
-    }
-    .logo{
-      display: none;
-    }
-  }
-@media screen and (min-width: 640px){
-    .head .two{
-      display: none;
-    }
-    .goback1{
-      display: none;
-    }
-  }
-
-
-  input {
+input {
     border: none;
 }
-
 .search {
     background: #ffffff;
 }
-
 .search_logo {
     height: 64px;
     padding: 20px 0 0 40px;
 }
-
 .search_logo img {
     height: 100%;
 }
@@ -78,10 +54,6 @@
     padding: 40px;
     display: none;
 }
-
-
-
-
 @media screen and (max-width: 640px){
     .search_main{
         width: 100%;

@@ -22,24 +22,26 @@
     <!-- 头部 -->
     <div class="head">
         <span class="logo">AI因子看板</span>
-        <ul class="layui-nav one">
+        <ul class="layui-nav first">
             <li class="layui-nav-item" onclick="showmodel()">专家信息</li>
             <li class="layui-nav-item" onclick="showmodel()">园区信息</li>
-            <li class="layui-nav-item" onclick="showmodel()">自助评级</li>
+            <li class="layui-nav-item"><a href="/ccrs">自助评级</a></li>
             <li class="layui-nav-item"><a href="http://ipoipo.cn/">行业研究</a></li>
             <li class="layui-nav-item"><a href="https://bigquant.com/wiki/home">量化研究</a></li>
+            <li class="layui-nav-item"><a target="_blank" href="http://www.chaguwang.cn/">查股网</a></li>
             <li class="layui-nav-item"><a href="/">首页</a></li>
             <li><a href="/search" class="layui-icon" style="color: #ffffff;">&#xe615;</a></li>
         </ul>
-        <ul class="two">
+        <ul class="sec">
             <li class="layui-nav-item two_li">
                 <i class="layui-icon" style="padding: 0 0 0 20px;">&#xe671;</i>
                 <dl class="layui-nav-child">
                     <dd><a href="/search"><i class="layui-icon" class="">&#xe615;</i></a></dd>
                     <dd><a href="/">首页</a></dd>
+                    <dd><a target="_blank" href="http://www.chaguwang.cn/">查股网</a></dd>
                     <dd><a href="https://bigquant.com/wiki/home">量化研究</a></dd>
                     <dd><a href="http://ipoipo.cn/">行业研究</a></dd>
-                    <dd><a href="javascript:;" onclick="showmodel()">自助评级</a></dd>
+                    <dd><a href="/ccrs">自助评级</a></dd>
                     <dd><a href="javascript:;" onclick="showmodel()">园区信息</a></dd>
                     <dd><a href="javascript:;" onclick="showmodel()">专家信息</a></dd>
                 </dl>
@@ -64,7 +66,7 @@
             </div>
             <div class="search_main">
                 <div class="search_box">
-                    <input type="text" class="search_inp" placeholder="搜索:量化联赛、kaggle、交易" onkeydown="enterSub(event)">
+                    <input type="text" class="search_inp" placeholder="搜索：量化金融信息" onkeydown="enterSub(event)">
                     <span class="layui-icon search_sub" onclick="searchSub()">&#xe615;</span>
                 </div>
             </div>
@@ -169,16 +171,13 @@
                             rel="noopener noreferrer">中信建投证券</a></dd>
                 </dl>
                 <dl>
-                    <dt>关注我们</dt>
                     <img src="../static/images/qrcode.png" alt="">
-                    <dd style="text-align: center">微信公众号</dd>
                 </dl>
             </div>
         </div>
         <div style="clear: both;"></div>
-        <p style="color: #000000;">@2022 津icp备15002249号-6</p>
     </div>
-
+    <p style="color: #000000;text-align: center;">@2022 津icp备15002249号-6</p>
     <style>
         input,
         select {
@@ -245,19 +244,16 @@
 
 </body>
 <script>
-    layui.use(['util'], function () {
-        var layer = layui.layer,
-            util = layui.util,
-            element = layui.element;
-        laydate = layui.laydate;
-        //返回顶部
-        util.fixbar({
-            bar1: false
-            , bar2: false
-            , css: { right: 10, bottom: 30 }
-            , bgcolor: '#009688'
-        });
+ layui.use(['util'],function(){
+  var util = layui.util;
+    //返回顶部
+    util.fixbar({
+      bar1: false
+      ,bar2: false
+      ,css: {right: 10, bottom: 30}
+      ,bgcolor: 'rgb(231, 76, 60)'
     });
+});
 
     $('.mask').click(function () {
         $('.pass_login,.qr_login').hide();

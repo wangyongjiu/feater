@@ -19,24 +19,26 @@
   <!-- 头部 -->
   <div class="head">
     <span class="logo">AI因子看板</span>
-    <ul class="layui-nav one">
+    <ul class="layui-nav first">
       <li class="layui-nav-item" onclick="showmodel()">专家信息</li>
       <li class="layui-nav-item" onclick="showmodel()">园区信息</li>
-      <li class="layui-nav-item" onclick="showmodel()">自助评级</li>
+      <li class="layui-nav-item"><a href="/ccrs">自助评级</a></li>
       <li class="layui-nav-item"><a href="http://ipoipo.cn/">行业研究</a></li>
       <li class="layui-nav-item"><a href="https://bigquant.com/wiki/home">量化研究</a></li>
+      <li class="layui-nav-item"><a target="_blank" href="http://www.chaguwang.cn/">查股网</a></li>
       <li class="layui-nav-item"><a href="/">首页</a></li>
       <li><a href="/search" class="layui-icon" style="color: #ffffff;">&#xe615;</a></li>
     </ul>
-    <ul class="two">
+    <ul class="sec">
       <li class="layui-nav-item two_li">
         <i class="layui-icon" style="padding: 0 0 0 20px;">&#xe671;</i>
         <dl class="layui-nav-child">
           <dd><a href="/search"><i class="layui-icon" class="">&#xe615;</i></a></dd>
           <dd><a href="/">首页</a></dd>
+          <dd><a target="_blank" href="http://www.chaguwang.cn/">查股网</a></dd>
           <dd><a href="https://bigquant.com/wiki/home">量化研究</a></dd>
           <dd><a href="http://ipoipo.cn/">行业研究</a></dd>
-          <dd><a href="javascript:;" onclick="showmodel()">自助评级</a></dd>
+          <dd><a href="/ccrs">自助评级</a></dd>
           <dd><a href="javascript:;" onclick="showmodel()">园区信息</a></dd>
           <dd><a href="javascript:;" onclick="showmodel()">专家信息</a></dd>
         </dl>
@@ -50,7 +52,7 @@
       <div class="describe">
         <form class="layui-form layui-form-pane" action="" method="post">
           <div class="layui-row">
-            <div class="layui-col-md3">
+            <div class="layui-col-md2">
               <div class="layui-form-item">
                 <label class="layui-form-label">algo：</label>
                 <div class="layui-input-block">
@@ -58,7 +60,7 @@
                 </div>
               </div>
             </div>
-            <div class="layui-col-md3">
+            <div class="layui-col-md2">
               <div class="layui-form-item">
                 <label class="layui-form-label">freq：</label>
                 <div class="layui-input-block">
@@ -66,7 +68,7 @@
                 </div>
               </div>
             </div>
-            <div class="layui-col-md3">
+            <div class="layui-col-md2">
               <div class="layui-form-item">
                 <label class="layui-form-label">vol：</label>
                 <div class="layui-input-block">
@@ -74,7 +76,7 @@
                 </div>
               </div>
             </div>
-            <div class="layui-col-md3">
+            <div class="layui-col-md2">
               <div class="layui-form-item">
                 <label class="layui-form-label">meta：</label>
                 <div class="layui-input-block">
@@ -82,7 +84,7 @@
                 </div>
               </div>
             </div>
-            <div class="layui-col-md3">
+            <div class="layui-col-md2">
               <div class="layui-form-item">
                 <label class="layui-form-label">end：</label>
                 <div class="layui-input-block">
@@ -90,7 +92,7 @@
                 </div>
               </div>
             </div>
-            <div class="layui-col-md3" style="float: right;">
+            <div class="layui-col-md2" style="float: right;">
               <button class="layui-btn" lay-button lay-filter="formDemo" type="button" style="padding: 0 120px;" onclick="FormSub()">确定</button>
             </div>
           </div>
@@ -98,7 +100,7 @@
     </div>
   </div>
   <!-- 因子看板 -->
-  <div class="layui-container" style="overflow: auto;text-align: right;width: 100%;">
+  <div class="layui-container" style="overflow: auto;text-align: right;width: 100%;position: relative;">
     <table class="layui-table Factor" width="100%" style="margin-bottom: 0;">
       <colgroup>
         <col width="150">
@@ -108,11 +110,14 @@
       <thead>
         <tr>
           <th>因子看板</th>
-          <th>000009.SZ</th>
+          <!-- <th>000009.SZ</th>
           <th>000012.SZ</th>
           <th>000021.SZ</th>
           <th>000027.SZ</th>
-          <th>000028.SZ</th>
+          <th>000028.SZ</th> -->
+          <th style="width: 5%;">
+            <i class="layui-icon" onclick="changelist()" style="cursor: pointer;">换一换&#xe669;</i>
+          </th>
         </tr> 
       </thead>
       <tbody>
@@ -123,6 +128,7 @@
           <td>1.60%</td>
           <td>0.96%</td>
           <td>0.015</td>
+          <td>更多</td>
         </tr>
       </tbody>
     </table>
@@ -131,11 +137,21 @@
       <div id="feather_page"></div>
     </div>
   </div>
+  <div class="frame">
+    <h3>标题</h3>
+    <div style="margin-top: 10px;">
+      <p><span>meta:</span><span id="f_meta">meta</span></p>
+      <p><span>algo:</span><span id="f_algo">algo</span></p>
+      <p><span>freq:</span><span id="f_freq">freq</span></p>
+      <p><span>vol:</span><span id="f_vol">vol</span></p>
+      <p><span>end:</span><span id="f_end">end</span></p>
+    </div>
+  </div>
   <!-- 图表 -->
   <div class="layui-container" style="width: 100%;">
     <div class="table_select">
       <form class="layui-row layui-col-space10 layui-form" action="" method="post">
-        <div class="layui-col-md4">
+        <div class="layui-col-md3">
           <div class="layui-form-item">
             <label class="layui-form-label">因子1</label>
             <div class="layui-input-block">
@@ -143,7 +159,7 @@
             </div>
           </div>
         </div>
-        <div class="layui-col-md4">
+        <div class="layui-col-md3">
           <div class="layui-form-item">
             <label class="layui-form-label">因子2</label>
             <div class="layui-input-block">
@@ -151,7 +167,15 @@
             </div>
           </div>
         </div>
-        <div class="layui-col-md4">
+        <div class="layui-col-md3">
+          <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 200px;padding-top: 0;"><button type="button"  class="layui-btn">计算相关系数</button></label>
+            <div class="layui-input-block" onclick="coe()">
+              <input type="text" disabled class="layui-input coe_int" style="width: 200px;">
+            </div>
+          </div>
+        </div>
+        <div class="layui-col-md3">
           <div class="layui-form-item">
             <div class="layui-input-block">
               <button type="button" class="layui-btn axis_btn" lay-button lay-filter="formDemo" style="padding: 0 100px;">确定</button>
@@ -185,15 +209,13 @@
           <dd><a href="https://www.csc108.com/comOverView/introduce.jspx" target="_blank" rel="noopener noreferrer">中信建投证券</a></dd>
         </dl>
         <dl>
-          <dt>关注我们</dt>
           <img src="../static/images/qrcode.png" alt="">
-          <dd style="text-align: center">微信公众号</dd>
         </dl>
       </div>
     </div>
     <div style="clear: both;"></div>
-    <p style="color: #000000;">@2022 津icp备15002249号-6</p>
   </div>
+  <p style="color: #000000;text-align: center;">@2022 津icp备15002249号-6</p>
   <style>
     input,select{
       border: none;
@@ -262,19 +284,28 @@
   })
 </script>
 <script>
-  $.ajax({
-    type:'get',
-    url:'/initform',
-    success:function(data){
-      for (const key in data) {
-        let _html = '';
-        for(var i = 0; i < data[key].length; i++){
-          _html+= '<option value="'+data[key][i]+'">'+data[key][i]+'</option>'
+  layui.use(['form'], function(){
+    var form = layui.form;
+    $.ajax({
+      type:'get',
+      url:'/initform',
+      success:function(data){
+        for (const key in data) {
+          let _html = '';
+          for(var i = 0; i < data[key].length; i++){
+            _html+= '<option value="'+data[key][i]+'">'+data[key][i]+'</option>'
+          }
+          $('select[name='+key+']').html('<option value="no">无</option>'+_html)
         }
-        $('select[name='+key+']').html('<option value="no">无</option>'+_html)
+        form.render();
+      },
+      error:function(err){
+        console.log('wrr'+err)
+        layer.msg('出错啦');
       }
-    }
+    })
   })
+
 </script>
 <script>
   var chartDom = document.getElementById('graphic_show');
@@ -303,14 +334,42 @@
   };
   myChart.setOption(option);
 
-
-  $('.axis_btn').click(function(){
+// 计算系数
+  function coe(){
     var x_axis;
     var y_axis;
     x_axis = $("select[name='x_axis']").val();
     y_axis = $("select[name='y_axis']").val();
-    // console.log(x_axis,y_axis);
+    $.ajax({
+      type:'get',
+      url:'/coefficient',
+      data:{
+        "x_axis":x_axis,
+        "y_axis":y_axis
+      },
+      success:function(data){
+        // console.log(data)
+        $('.coe_int').val(data);
+      },
+      error:function(err){
+        console.log('wrr'+err)
+        layer.msg('出错啦');
+      }
+    })
+  }
 
+
+
+  $('.axis_btn').click(function(){
+    var x_axis;
+    var y_axis;
+    var x_name;
+    var y_name;
+    x_axis = $("select[name='x_axis']").val();
+    y_axis = $("select[name='y_axis']").val();
+    // console.log(x_axis,y_axis);
+    x_name = x_axis.split('-')[0]
+    y_name = y_axis.split('-')[0]
     $.ajax({
       type:'get',
       url:'/indexEcharts',
@@ -319,21 +378,30 @@
         "y_axis":y_axis
       },
       success:function(data){
+        for (const key in data){
+          data[key].unshift(x_name+'-'+y_name+key)
+        }
         var datasets = {};
         datasets['source'] = data;
         option.dataset = datasets;
         option.series = [{ type: 'bar' }, { type: 'bar' }];
         // console.log(option)
         myChart.setOption(option);
+      },
+      error:function(err){
+        console.log('wrr'+err)
+        layer.msg('出错啦');
       }
     })
   })
 </script>
 <script>
-  layui.use('laypage', function(){
+  layui.use(['laypage','form'], function(){
     var laypage = layui.laypage;
+    var form = layui.form;
     let _html = '';
     var _htmlecharts = '';
+    var _table_title = '';
     $.ajax({
       type:'get',
       url:'/tol_page',
@@ -353,9 +421,14 @@
               url:'/page',
               success:function(data){
                 data = JSON.parse(data);
+                var len_arr = Object.keys(data[Object.keys(data)[0]]);
+                for(var i = 0; i < len_arr.length; i++){
+                  _table_title += '<th>'+len_arr[i]+'</th>'
+                }
+                _table_title = '<th>因子看板</th>'+_table_title+'<th style="width: 5%;"><i class="layui-icon" onclick="changelist()" style="cursor: pointer;">换一换&#xe669;</i></th>'
+                // console.log(data)
                 for (const key in data) {
                   // console.log(key)
-
                   var _tdhtml = '';
                   for (const i in data[key]) {
                     _tdhtml += '<td>'+data[key][i]+'</td>'
@@ -363,18 +436,22 @@
                   _html +=  '<tr>'+
                             '<td><a href="/details/'+key+'">'+key+'</a></td>'+
                               _tdhtml+
+                            '<td><a href="/details/'+key+'">更多</a></td>'+
                             '</tr>'
                 }
+                $('.Factor thead').html(_table_title);
                 $('.Factor tbody').html(_html);
                 _html = '';
+                _table_title = '';
 
                 for (const key in data) {
                   _htmlecharts += '<option value="'+key+'">'+key+'</option>';
                 }
-                console.log(_htmlecharts)
-                $('#y_axis').html('<option value="no">无</option>'+_htmlecharts);
+                // console.log(_htmlecharts)
+                $('#y_axis').html(_htmlecharts);
                 $('#x_axis').html(_htmlecharts);
                 _htmlecharts = '';
+                form.render();
               },
               error:function (err) {
                 layer.msg('出错啦');
@@ -382,9 +459,50 @@
             })
           }
         });
+      },
+      error:function(err){
+        console.log('wrr'+err)
+        layer.msg('出错啦');
       }
     })
   });
+  // 换一换
+  function changelist(){
+    var _table_title = '';
+    var _html = '';
+    $.ajax({
+      type:'get',
+      url:'/changeList',
+      data:{},
+      success:function(data){
+        // console.log(data)
+        var len_arr = Object.keys(data[Object.keys(data)[0]]);
+        for(var i = 0; i < len_arr.length; i++){
+          _table_title += '<th>'+len_arr[i]+'</th>'
+        }
+        _table_title = '<th>因子看板</th>'+_table_title+'<th style="width: 5%;"><i class="layui-icon" onclick="changelist()" style="cursor: pointer;">换一换&#xe669;</i></th>'
+        for (const key in data) {
+          var _tdhtml = '';
+          for (const i in data[key]) {
+            _tdhtml += '<td>'+data[key][i]+'</td>'
+          }
+          _html +=  '<tr>'+
+                    '<td><a href="/details/'+key+'">'+key+'</a></td>'+
+                      _tdhtml+
+                      '<td><a href="/details/'+key+'">更多</a></td>'+
+                    '</tr>'
+        }
+        $('.Factor thead').html(_table_title);
+        $('.Factor tbody').html(_html);
+        _html = '';
+        _table_title = '';
+      },
+      error:function(err){
+        console.log('wrr'+err)
+        layer.msg('出错啦');
+      }
+    })
+  }
   </script>
 <script>
   function FormSub(){
@@ -397,11 +515,18 @@
     // console.log(algo,freq,vol,meta,end);
 
     var _html = '';
+    var _table_title = '';
     $.ajax({
         type:'post',
         url:'/formsub',
         data:{"algo":algo,"freq":freq,"vol":vol,"meta":meta,"end":end},
         success:function(data){
+          // console.log(data)
+          var len_arr = Object.keys(data[Object.keys(data)[0]]);
+          for(var i = 0; i < len_arr.length; i++){
+            _table_title += '<th>'+len_arr[i]+'</th>'
+          }
+          _table_title = '<th>因子看板</th>'+_table_title+'<th style="width: 5%;"><i class="layui-icon" onclick="changelist()" style="cursor: pointer;">换一换&#xe669;</i></th>'
           for (const key in data) {
             var _tdhtml = '';
             for (const i in data[key]) {
@@ -410,12 +535,13 @@
             _html +=  '<tr>'+
                       '<td><a href="/details/'+key+'">'+key+'</a></td>'+
                         _tdhtml+
+                        '<td><a href="/details/'+key+'">更多</a></td>'+
                       '</tr>'
           }
+          $('.Factor thead').html(_table_title);
           $('.Factor tbody').html(_html);
           _html = '';
-
-
+          _table_title = '';
         },
         error:function(err){
           layer.msg('出错啦');
@@ -424,17 +550,45 @@
   }
 </script>
 <script>
+  $(function(){
+    var modeldata;
+    $.ajax({
+      type:'get',
+      url:'/indexdes',
+      success:function(data){
+        // console.log(data);
+        modeldata = data;
+      },
+      error:function(err){}
+    })
+    $('.Factor').on('mouseenter','td',function(e){
+      // console.log(e)
+      var first = $(this).parent().children()[0].innerText;
+      $('.frame h3').html(modeldata[first]['title']);
+      $('#f_meta').html(modeldata[first]['meta']);
+      $('#f_algo').html(modeldata[first]['algo']);
+      $('#f_freq').html(modeldata[first]['freq']);
+      $('#f_vol').html(modeldata[first]['vol']);
+      $('#f_end').html(modeldata[first]['end']);
+      $('.frame').show()
+    })
+    $('.Factor').on('mousemove','td',function(e){
+      $('.frame').css({"left":e.pageX+20,"top":e.pageY+20})
+    })
+    $('.Factor').on('mouseout','td',function(e){
+      $('.frame').hide();
+    })
+  })
+</script>
+<script>
 layui.use(['util'],function(){
-  var layer = layui.layer,
-      util = layui.util,
-      element = layui.element;
-      laydate = layui.laydate;
+  var util = layui.util;
     //返回顶部
     util.fixbar({
       bar1: false
       ,bar2: false
       ,css: {right: 10, bottom: 30}
-      ,bgcolor: '#009688'
+      ,bgcolor: 'rgb(231, 76, 60)'
     });
 });
 

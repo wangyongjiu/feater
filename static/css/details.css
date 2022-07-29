@@ -11,18 +11,13 @@
 }
 .title .r{
   float: right;
-    padding-right: 10px;
+  padding-right: 10px;
 }
 .table_l{
     width: 50%;
     float: left;
 }
 
-.describe{
-  background: #ffffff;
-  padding: 24px;
-  border-bottom: 1px solid #cccccc;
-}
 .describe h1{
   font-size: 28px;
   margin-bottom: 12px;
@@ -55,34 +50,6 @@
   height:0;
 }
 
-
-.goback{
-  position: absolute;
-  right: 40px;
-  top: 24px;
-}
-.goback1{
-  padding: 0 10px;
-}
-@media screen and (max-width: 640px){
-  .head .one{
-    display: none;
-  }
-  .goback{
-    display: none;
-  }
-  .logo{
-    display: none;
-  }
-}
-@media screen and (min-width: 640px){
-  .head .two{
-    display: none;
-  }
-  .goback1{
-    display: none;
-  }
-}
 .two_li dl dd{
   padding-left: 20px;
   border-bottom: 1px dashed #cccccc;

@@ -1,61 +1,46 @@
 
-  .describe{
-    background: #ffffff;
-    padding: 24px;
-    border-bottom: 1px solid #cccccc;
-  }
-
-  .head{
-    width: 100%;
-    line-height: 60px;
-    background: #009688;
-    color: #ffffff;
-    position: fixed;
-    top: 0;
-    z-index: 10;
-  }
-  .head span{
-    float: left;
-    margin-left: 10px;
-    font-weight: 700;
-  }
-  .head ul li{
-    float: right;
-    padding-right: 20px;
-  }
-  .Factor a{
-    color: #4184e1;
-  }
- .layui-table th{
-    text-align: right;
-  }
-  @media screen and (max-width: 640px){
-    .head .one{
-      display: none;
-    }
-    .goback{
-      display: none;
-    }
-  }
-  @media screen and (min-width: 640px){
-    .head .two{
-      display: none;
-    }
-    .goback1{
-      display: none;
-    }
-  }
-  .two_li dl dd{
-    padding-left: 20px;
-    border-bottom: 1px dashed #cccccc;
-  }
-  .table_select{
-    background: #ffffff;
-    margin-bottom: 15px;
-    padding: 20px 0;
-  }
-  #graphic_show{
-    width: 100%;
-    height: 400px;
-  }
-  
+.Factor a{
+  color: #4184e1;
+}
+.Factor tr td{
+  cursor: text;
+}
+.layui-table th{
+  text-align: right;
+}
+.two_li dl dd{
+  padding-left: 20px;
+  border-bottom: 1px dashed #cccccc;
+}
+.table_select{
+  background: #ffffff;
+  margin-bottom: 15px;
+  padding: 20px 0;
+}
+#graphic_show{
+  width: 100%;
+  height: 400px;
+}
+.frame{
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 300px;
+  height: 160px;
+  background: #fff;
+  z-index: 100;
+  text-align: left;
+  box-shadow: 0 0 5px 1px rgb(231, 76, 60);
+  border-radius: 5px;
+  display: none;
+}
+.frame h3{
+  margin-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #ccc;
+}
+.frame p{
+  line-height: 20px;
+  padding: 0 10px;
+}
