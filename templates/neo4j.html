@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+<head>
+    <title>neo4j可视化展示</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="聚宽让量化交易的成长之路更为平坦，聚宽让做量化交易的成本极大降低">
+    <meta name="keywords" content="因子看板、研究策略、本地数据、量化聚宽">
+    <meta name="robots" content="all"/>
+    <link rel="shortcut icon" href="../static/favicon.ico"  type="image/x-icon"/>
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../static/css/public.css">
+    <link rel="stylesheet" href="../static/css/neo4j.css">
+    <script src="../static/jquery-1.11.1.min.js"></script>
+    <script src="../static/echarts/dist/echarts.min.js"></script>
+    <script src="../static/layui/layui.js"></script>
+    <script src="../static/js/neovis.js"></script>
+</head>
+<body onload="draw()">
+
+    <!-- 头部 -->
+    <div class="head">
+        <span class="logo">AI因子看板</span>
+        <ul class="layui-nav first">
+        <li class="layui-nav-item" onclick="showmodel()">专家信息</li>
+		<li class="layui-nav-item"><a href="/neo4j">neo4j</a></li>
+        <li class="layui-nav-item"><a href="/ccrs">自助评级</a></li>
+        <li class="layui-nav-item"><a href="http://ipoipo.cn/">行业研究</a></li>
+        <li class="layui-nav-item"><a href="https://bigquant.com/wiki/home">量化研究</a></li>
+        <li class="layui-nav-item"><a target="_blank" href="http://www.chaguwang.cn/">查股网</a></li>
+        <li class="layui-nav-item"><a href="/">首页</a></li>
+        <li><a href="/search" class="layui-icon" style="color: #ffffff;">&#xe615;</a></li>
+        </ul>
+        <ul class="sec">
+        <li class="layui-nav-item two_li">
+            <i class="layui-icon" style="padding: 0 0 0 20px;">&#xe671;</i>
+            <dl class="layui-nav-child">
+            <dd><a href="/search"><i class="layui-icon" class="">&#xe615;</i></a></dd>
+            <dd><a href="/">首页</a></dd>
+            <dd><a target="_blank" href="http://www.chaguwang.cn/">查股网</a></dd>
+            <dd><a href="https://bigquant.com/wiki/home">量化研究</a></dd>
+            <dd><a href="http://ipoipo.cn/">行业研究</a></dd>
+            <dd><a href="/ccrs">自助评级</a></dd>
+			<dd><a href="/neo4j">neo4j</a></dd>
+            <dd><a href="javascript:;" onclick="showmodel()">专家信息</a></dd>
+            </dl>
+        </li>
+        </ul>
+        <div style="clear: both;"></div>
+    </div>
+
+
+	<!-- <div class="project_title">Neo4j数据展示</div> -->
+	<div class="query_list1">
+		<ul>
+			<li>数据库信息</li>
+			<li>收藏</li>
+			<li>帮助</li>
+			<li>资源</li>
+			<li>选择数据库</li>
+			<li>选择数据库</li>
+			<li>选择数据库</li>
+			<li>选择数据库</li>
+			<li>选择数据库</li>
+			<li>本浏览界面设置</li>
+			<li>关于Neo4j</li>
+			<li>数据库系统</li>
+			<li>版本信息</li>
+		</ul>
+	</div>
+	<div id="viz"></div>
+	<div class="query_list">
+		<span>检索</span>
+		<div class="btn">
+			<textarea rows="4" cols=50 id="cypher" placeholder="neo4j $ "></textarea><br>
+			<span id="reload">Submit</span>
+			<span id="stabilize">Stabilize</span>
+		</div>
+		<span>节点标签</span>
+		<a href="#" onclick="change('MATCH (n) RETURN n LIMIT 25')">*（1321）</a>
+        <a href="#" onclick="change('MATCH (n:Character) RETURN n LIMIT 25')">Character</a>
+		<span>关系类型</span>
+        <a href="#" onclick="change('MATCH p=()-->() RETURN p LIMIT 25')">*(3589)</a>
+        <a href="#" onclick="change('MATCH p=()-[r:INTERACTS]->() RETURN p LIMIT 25')">INTERACTS</a>
+	</div>
+	<div class="bgm"></div>
+
+
+    <!-- 底部 -->
+<div class="footer">
+    <div class="layui-container">
+        <div>
+        <dl class="dl">
+            <dt>关于</dt>
+            <dd><a href="http://www.tafirt.org/about.html" target="_blank" rel="noopener noreferrer">关于我们</a></dd>
+            <dd><a href="http://www.tafirt.org/coalize.html" target="_blank" rel="noopener noreferrer">加入我们</a></dd>
+            <dd><a href="http://www.tafirt.org/contact.html" target="_blank" rel="noopener noreferrer">联系我们</a></dd>
+        </dl>
+        <dl class="dl">
+            <dt>帮助</dt>
+            <dd onclick="showmodel()">常见问题</dd>
+            <dd onclick="showmodel()">API文档</dd>
+        </dl>
+        <dl class="dl">
+            <dt>友情链接</dt>
+            <dd><a href="http://www.ia.cas.cn/" target="_blank" rel="noopener noreferrer">中国科学院自动化研究所</a></dd>
+            <dd><a href="http://www.ia.cas.cn/jgsz/kyxt/ZNGZ/" target="_blank" rel="noopener noreferrer">智能感知与计算研究中心</a></dd>
+            <dd><a href="https://www.csc108.com/comOverView/introduce.jspx" target="_blank" rel="noopener noreferrer">中信建投证券</a></dd>
+        </dl>
+        <dl>
+            <img src="../static/images/qrcode.png" alt="">
+        </dl>
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+</body>
+<!-- FIXME: load from dist -->
+
+<script type="text/javascript">
+	// define config car
+	// instantiate nodevis object
+	// draw
+	var viz;
+	var config = {
+		container_id: "viz",
+		server_url: "neo4j://localhost:7687",
+		server_user: "neo4j",
+		server_password: "neo4j",
+		labels: {
+			//"Character": "name",
+			"Character": {
+				"caption": "name",
+				"size": "pagerank",
+				"community": "community"
+				//"sizeCypher": "MATCH (n) WHERE id(n) = {id} MATCH (n)-[r]-() RETURN sum(r.weight) AS c"
+			}
+		},
+		relationships: {
+			"INTERACTS": {
+				"thickness": "weight",
+				"caption": false
+			}
+		},
+		initial_cypher: "MATCH (n) RETURN n LIMIT 25"
+	};
+	function draw(){
+		viz = new NeoVis.default(config);
+		viz.render();
+	}
+	function change(arg){
+		config.initial_cypher = arg
+		viz = new NeoVis.default(config);
+		viz.render();
+	}
+</script>
+<script>
+	$("#reload").click(function() {
+		var cypher = $("#cypher").val();
+		if (cypher.length > 3) {
+			viz.renderWithCypher(cypher);
+		} else {
+			viz.reload();
+		}
+	});
+	$("#stabilize").click(function() {
+		viz.stabilize();
+	})
+
+</script>
+</html>
